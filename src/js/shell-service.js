@@ -1,4 +1,4 @@
-const RESOURCE = '/data/data.json';
+const RESOURCE = 'data/data.json';
 
 export class ShellService {
     getData() {

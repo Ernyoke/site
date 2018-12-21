@@ -7,6 +7,7 @@
     "test": "ava",
     "start": "webpack-dev-server --open --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
     "clean-source": "rimraf README.md src webroot package.json"
   },
@@ -24,6 +25,7 @@
     "babel-loader": "^8.0.4",
     "browser-env": "^3.2.5",
     "clean-webpack-plugin": "^0.1.19",
+    "copy-webpack-plugin": "^4.6.0",
     "css-loader": "^1.0.1",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^2.0.0",
