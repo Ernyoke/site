@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <title>Cli</title>
+</head>
+<body>
+<div class="terminal-window">
+    <header>
+        <div class="window-title">
+            <img id="terminal-icon" src="img/terminal_icon.png" alt="terminal icon"/>
+            <div id="terminal-title">Command prompt</div>
+        </div>
+        <div class="button">
+            <svg height="12" width="12">
+                <line x1="0" y1="0" x2="12" y2="12" style="stroke:rgb(0,0,0); stroke-width:1px"></line>
+                <line x1="0" y1="12" x2="12" y2="0" style="stroke:rgb(0,0,0); stroke-width:1px"></line>
+            </svg>
+        </div>
+        <div class="button">
+            <svg width="12" height="12">
+                <rect width="12" height="12" style="stroke-width:2px; stroke:rgb(0,0,0)" fill="none"></rect>
+            </svg>
+        </div>
+        <div class="button">
+            <svg height="12" width="12">
+                <line x1="0" y1="6" x2="12" y2="6" style="stroke:rgb(0,0,0); stroke-width:1px"></line>
+            </svg>
+        </div>
+    </header>
+    <div id="terminal">
+        <div>CLI [Version 1.0.0]</div>
+        <div>(c) 2018 Ervin Szilagyi. All rights reserver.</div>
+        <div>Type `help` to get started.</div>
+        <p></p>
+        <div class="hidden">
+                <span class="prompt">
+                    <span class="pwd">C:\></span>
+                </span>
+            <span class="input" contenteditable="true"></span>
+        </div>
+    </div>
+</div>
+
+<div id="loading">
+    <p>Loading...</p>
+</div>
+
+<footer>
+    <p>Site code can be found <a class="site-code" href="" target="_blank">here</a></p>
+</footer>
+
+</body>
+
+</html>

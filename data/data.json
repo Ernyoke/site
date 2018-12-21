@@ -1,0 +1,33 @@
+{
+  "type": "dir",
+  "lastModified": "09/15/2018  02:39 PM",
+  "name": "",
+  "content": [
+    {
+      "type": "dir",
+      "lastModified": "09/15/2018  02:39 PM",
+      "name": "projects",
+      "content": []
+    },
+    {
+      "type": "dir",
+      "lastModified": "09/15/2018  02:39 PM",
+      "name": "resume",
+      "content": []
+    },
+    {
+      "type": "file",
+      "lastModified": "09/15/2018  02:39 PM",
+      "size": "32",
+      "name": "about.txt",
+      "content": "About me!"
+    },
+    {
+      "type": "file",
+      "lastModified": "09/15/2018  02:39 PM",
+      "size": "32",
+      "name": "contacts.txt",
+      "content": "contacts"
+    }
+  ]
+}

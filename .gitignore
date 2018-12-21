@@ -1,0 +1,8 @@
+# IntellIJ
+.idea/
+
+# node
+node_modules/
+
+# dist
+dist/
