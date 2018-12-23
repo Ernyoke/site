@@ -55,9 +55,6 @@ body {
     margin-left: -30px; }
   .terminal-window h4 {
     text-align: center; }
-  .terminal-window a {
-    text-align: center;
-    display: block; }
   .terminal-window .input {
     outline-color: #000000;
     border: none;

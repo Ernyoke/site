@@ -13,21 +13,36 @@
       "type": "dir",
       "lastModified": "09/15/2018  02:39 PM",
       "name": "resume",
-      "content": []
+      "content": [
+        {
+          "type": "file",
+          "lastModified": "12/23/2018  06:00 PM",
+          "name": "resume.txt",
+          "content": "<div>Download my full resume: <a href=\"data\\ervin_szilagyi.pdf\">ervin_szilagyi.pdf</a> </div>",
+          "size": 2
+        },
+        {
+          "type": "file",
+          "lastModified": "12/23/2018  06:30 PM",
+          "name": "social.txt",
+          "content": "<div>You can find me here: <ul><li>LinkId:<a href=\"https://www.linkedin.com/in/szilagyiervin/\">in/szilagyiervin</a></li><li>Twitter:<a href=\"https://twitter.com/ervin_szilagyi\">@ervin_szilagyi</a></li><li>StackOverflow:<a href=\"https://stackoverflow.com/users/7661119/ervin-szilagyi\">ervin-szilagyi</a></li><li>GitHub:<a href=\"https://github.com/Ernyoke\">@ernyoke</a></li></ul></div>",
+          "size": 12
+        }
+      ]
     },
     {
       "type": "file",
       "lastModified": "09/15/2018  02:39 PM",
       "size": "32",
       "name": "about.txt",
-      "content": "About me!"
+      "content": "My name is Ervin Szilagyi. I'm a software engineer currently working for Endava Romania as a full-stack developer. I have a bachelor's degree in computer science and a master's degree in software engineering, both from Sapientia Hungarian University of Transylvania. I'm interested in micro-services and computer security."
     },
     {
       "type": "file",
       "lastModified": "09/15/2018  02:39 PM",
-      "size": "32",
-      "name": "contacts.txt",
-      "content": "contacts"
+      "size": "12",
+      "name": "contact.txt",
+      "content": "<div>Email: ervin.szilagyi[at]outlook.com</div><div>Skype: ervin.szilagyi[at]outlook.com</div>"
     }
   ]
 }
