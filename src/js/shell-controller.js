@@ -126,7 +126,7 @@ export class ShellController {
             '<ul>' +
             '<li>dir: List the content of the current directory. Equivalent of "ls" commend under Unix systems.</li>' +
             '<li>type: Show the content of a file. Equivalent of "cat" commend under Unix systems. Usage: type [FILENAME]</li>' +
-            '<li>cd: Navigate into a selected directory. Usage: cat [DIRNAME]. To navigate up: cat ..  </li>' +
+            '<li>cd: Navigate into a selected directory. Usage: cd [DIRNAME]. To navigate up: cd ..  </li>' +
             '<li>clear: Clear the current terminal input screen.  </li>' +
             '</ul>' +
             '</div>';
