@@ -7,4 +7,12 @@ const formatNumber = (numberStr, maxStringSize) => {
     return str;
 };
 
-export {formatNumber};
+const whiteSpace = count => {
+    let str = '';
+    for (let i = 0; i < count; i++) {
+        str += '&nbsp';
+    }
+    return str;
+};
+
+export {formatNumber, whiteSpace};

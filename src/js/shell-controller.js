@@ -1,6 +1,6 @@
 'use strict';
 
-import {formatNumber} from './utils'
+import {formatNumber, whiteSpace} from './utils'
 
 const CONTENT_TYPE = {
     FILE: "file",
@@ -67,8 +67,9 @@ export class ShellController {
             output += `<div><span>${item.lastModified} ${type} ${size} ${item.name}</span></div>`;
         }
         output += '' +
-            `<div>${countNumberOfFiles} File(s) ${sumFileSizes} bytes</div>` +
-            `<div>${countNumberOfDirectories} Dir(s) ${Math.floor((Math.random() * 1000) + 1000)} bytes free</div>` +
+            `<div>${whiteSpace(14)}${countNumberOfFiles} File(s) ${sumFileSizes} bytes</div>` +
+            `<div>${whiteSpace(14)}${countNumberOfDirectories} Dir(s) ` +
+            `${Math.floor((Math.random() * 1000) + 1000)} bytes free</div>` +
             '</div>';
         this.shellView.showOutput(output);
     }

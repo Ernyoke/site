@@ -21,6 +21,7 @@ export class ShellView {
             try {
                 this.shellController.processCommand(input);
             } catch (e) {
+                console.error(e);
                 this.showError(e.message);
             }
             event.preventDefault();
