@@ -1,3 +1,5 @@
+'use strict';
+
 const RESOURCE = 'data/data.json';
 
 export class ShellService {

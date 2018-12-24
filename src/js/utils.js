@@ -1,3 +1,5 @@
+'use strict';
+
 const formatNumber = (numberStr, maxStringSize) => {
     let str = numberStr.toString();
     const size = str.length;
