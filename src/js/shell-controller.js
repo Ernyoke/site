@@ -1,10 +1,11 @@
 'use strict';
 
 import {formatNumber, whiteSpace} from './utils'
+import {LinkedList} from "./linked-list";
 
 const CONTENT_TYPE = {
-    FILE: "file",
-    DIR: "dir"
+    FILE: 'file',
+    DIR: 'dir'
 };
 
 export class ShellController {
@@ -19,6 +20,7 @@ export class ShellController {
             'cls': () => this.clearScreen(),
             'help': () => this.help()
         };
+        this.history = new LinkedList();
     }
 
     processCommand(input) {
@@ -32,15 +34,32 @@ export class ShellController {
         }
     }
 
+    estimateCommand(input) {
+
+    }
+
     parseCommand(command, args) {
-        try {
-            if (!!this.commands[command]) {
-                this.commands[command](args);
-            } else {
-                throw Error("Nonexistent command!");
-            }
-        } catch (e) {
-            throw e;
+        if (!!this.commands[command]) {
+            this.commands[command](args);
+            this.history.last = [command, args];
+        } else {
+            throw Error('Nonexistent command!');
+        }
+    }
+
+    historyBefore() {
+        const commandWithArguments = this.history.navigateBackward();
+        if (!!commandWithArguments) {
+            const prompt = commandWithArguments.reduce((accumulator, currentValue) => accumulator + ' ' + currentValue);
+            this.shellView.setPrompt(prompt);
+        }
+    }
+
+    historyAfter() {
+        const commandWithArguments = this.history.navigateForward();
+        if (!!commandWithArguments) {
+            const prompt = commandWithArguments.reduce((accumulator, currentValue) => accumulator + ' ' + currentValue);
+            this.shellView.setPrompt(prompt);
         }
     }
 

@@ -14,31 +14,73 @@ export class ShellView {
         this.shellController = shellController;
     }
 
+    processKeyEvent(event, func) {
+        const prompt = event.target || {};
+        const input = prompt.textContent.trim();
+        try {
+            func(input);
+        } catch (e) {
+            console.error(e);
+            this.showError(e.message);
+        }
+        event.preventDefault();
+    }
+
     keyPressEvent(event) {
-        if (event.keyCode === 13) {
-            const prompt = event.target || {};
-            const input = prompt.textContent.trim();
-            try {
-                this.shellController.processCommand(input);
-            } catch (e) {
-                console.error(e);
-                this.showError(e.message);
+        switch (event.keyCode) {
+            // handle TAB key event
+            case 9: {
+                this.processKeyEvent(event, (input) => {
+                    this.shellController.estimateCommand(input);
+                });
+                break;
             }
-            event.preventDefault();
-            this.resetPrompt(prompt);
+            // handle ENTER key event
+            case 13: {
+                this.processKeyEvent(event, (input) => {
+                    this.shellController.processCommand(input);
+                });
+                this.resetPrompt();
+                break;
+            }
+            // handle UP key event
+            case 38: {
+                this.processKeyEvent(event,(input) => {
+                    this.shellController.historyBefore(input);
+                });
+                break;
+            }
+            // handle DOWN key event
+            case 40: {
+                this.processKeyEvent(event,(input) => {
+                    this.shellController.historyAfter(input);
+                });
+                break;
+            }
         }
     }
 
-    resetPrompt(prompt) {
+    resetPrompt() {
+        const prompt = document.querySelector('.prompt') || {};
         const newPrompt = prompt.parentNode.cloneNode(true);
-        prompt.setAttribute('contenteditable', false);
-        this.terminalWindow.appendChild(newPrompt);
         const currentPath = this.shellController.computeCurrentPath();
         const newPwd = newPrompt.querySelector('.pwd') || {};
         newPwd.innerText = currentPath + '>';
         const newInput = newPrompt.querySelector('.input') || {};
         newInput.innerHTML = '';
+        prompt.setAttribute('contenteditable', false);
+        this.terminalWindow.appendChild(newPrompt);
         newInput.focus();
+    }
+
+    setPrompt(command) {
+        const prompts = document.querySelectorAll('.prompt');
+        if (prompts.length > 0) {
+            const prompt = prompts[prompts.length - 1];
+            const input = prompt.parentNode.querySelector('.input');
+            input.innerHTML = command;
+            input.focus();
+        }
     }
 
     showOutput(output) {
@@ -55,12 +97,12 @@ export class ShellView {
 }
 
 const init = () => {
-    const terminalWindow = document.getElementById('terminal') || {};
+    const terminalWindow = document.getElementsByClassName('terminal')[0] || {};
     const loading = document.getElementById('loading') || {};
 
     const shellView = new ShellView(terminalWindow);
 
-    terminalWindow.addEventListener('keypress', (event) => {
+    terminalWindow.addEventListener('keydown', (event) => {
         shellView.keyPressEvent(event);
     });
 

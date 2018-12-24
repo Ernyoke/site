@@ -14,23 +14,6 @@ body {
   display: block;
   top: 25vh;
 
-  &.fullscreen {
-    z-index: 9999;
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-
-    header {
-      display: none;
-    }
-
-    #terminal {
-      top: 0;
-    }
-  }
-
   header {
     background: $header;
     height: 30px;
@@ -38,6 +21,7 @@ body {
     .window-title {
       float: left;
       padding: 8px 0 8px 8px;
+
       #terminal-icon {
         float: left;
       }
@@ -57,7 +41,7 @@ body {
     }
   }
 
-  #terminal {
+  .terminal {
     color: white;
     font-family: Consolas, "Courier New", Courier, serif;
     font-size: 10pt;
@@ -69,52 +53,17 @@ body {
     top: 30px;
     bottom: 0;
     overflow-y: scroll;
+
+    .input {
+      outline-color: $terminal-background;
+      border: none;
+      display: inline-block;
+    }
   }
 
-  .contact {
-    list-style: none;
-    margin-left: -30px;
-  }
+  .error {
 
-  h4 {
-    text-align: center;
   }
-
-  .input {
-    outline-color: $terminal-background;
-    border: none;
-    display: inline-block;
-  }
-
-  .root {
-    color: #95F584;
-  }
-
-  .tick {
-    color: #EC4891;
-  }
-
-  .blue {
-    color: lightblue;
-  }
-
-  .gray {
-    color: gray;
-  }
-
-  .dir {
-    color: #88DEF2;
-  }
-
-  .green {
-    color: green;
-  }
-}
-
-.command_input {
-  border: none;
-  background: #000634;
-  color: white;
 }
 
 footer {
@@ -129,8 +78,4 @@ footer {
     font-weight: bold;
     color: lightblue;
   }
-}
-
-.terminal-data {
-  display: none;
 }
