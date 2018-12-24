@@ -7,7 +7,29 @@
       "type": "dir",
       "lastModified": "09/15/2018  02:39 PM",
       "name": "projects",
-      "content": []
+      "content": [
+        {
+          "type": "file",
+          "lastModified": "12/24/2018 6:25 PM",
+          "name": "imger.txt",
+          "content": "<div>A small image processing library written in Go. Source code: <a href=\"https://github.com/Ernyoke/Imger\">github</a></div>",
+          "size": 8
+        },
+        {
+          "type": "file",
+          "lastModified": "12/24/2018 6:25 PM",
+          "name": "delaunayimage.txt",
+          "content": "<div>DelaunayImage is tool which lets you generate artistic bitmap and/or vector graphic images using Delaunay triangulation algorithm. Source code: <a href=\"https://github.com/Ernyoke/DelaunayImage\">github</a></div>",
+          "size": 10
+        },
+        {
+          "type": "file",
+          "lastModified": "12/24/2018 6:30 PM",
+          "name": "artistic_video_gui.txt",
+          "content": "The project's goal was the develop a GUI application where the user can transfer the artistic style from well known pictures painted by hungarian artists to their chosen images\\videos. Source code: <a href=\"https://github.com/Ernyoke/Artistic_video_GUI\">github</a></div>",
+          "size": 12
+        }
+      ]
     },
     {
       "type": "dir",
@@ -29,6 +51,12 @@
           "size": 12
         }
       ]
+    },
+    {
+      "type": "dir",
+      "lastModified": "09/15/2018  02:40 PM",
+      "name": "talks",
+      "content": []
     },
     {
       "type": "file",
