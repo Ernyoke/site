@@ -40,7 +40,7 @@ export class ShellView {
                 this.processKeyEvent(event, (input) => {
                     this.shellController.processCommand(input);
                 });
-                this.resetPrompt();
+                this.resetPrompt(event);
                 break;
             }
             // handle UP key event
@@ -60,8 +60,8 @@ export class ShellView {
         }
     }
 
-    resetPrompt() {
-        const prompt = document.querySelector('.prompt') || {};
+    resetPrompt(event) {
+        const prompt = event.target || {};
         const newPrompt = prompt.parentNode.cloneNode(true);
         const currentPath = this.shellController.computeCurrentPath();
         const newPwd = newPrompt.querySelector('.pwd') || {};
