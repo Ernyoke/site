@@ -49,6 +49,13 @@
           "name": "social.txt",
           "content": "<div>You can find me here: <ul><li>LinkId:<a href=\"https://www.linkedin.com/in/szilagyiervin/\">in/szilagyiervin</a></li><li>Twitter:<a href=\"https://twitter.com/ervin_szilagyi\">@ervin_szilagyi</a></li><li>StackOverflow:<a href=\"https://stackoverflow.com/users/7661119/ervin-szilagyi\">ervin-szilagyi</a></li><li>GitHub:<a href=\"https://github.com/Ernyoke\">@ernyoke</a></li></ul></div>",
           "size": 12
+        },
+        {
+          "type": "file",
+          "lastModified": "12/24/2018  12:00 AM",
+          "name": "coding.txt",
+          "content": "<div>I'm mostly interested in JVM languages like Java, Kotlin, etc. In the past I've done professionally C/C++ using MFC and Boost libraries. I'm not a big fan of dynamically typed languages, but I can get along with Javascript and Python. In my professional job/free time I've used extensively the following languages/frameworks: QT(C++ and PyQt), Android(using both Java and Kotlin), Angular(AngularJS as a full-stack developer at my current job, Angular2 and upwards in some private projects), Spring(extensive used in my current job, used in several home projects).</div>",
+          "size": 20
         }
       ]
     },
