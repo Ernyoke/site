@@ -106,11 +106,19 @@ const init = () => {
         shellView.keyPressEvent(event);
     });
 
+    // Focus the last input whenever a click is done inside the terminal window.
+    terminalWindow.addEventListener('mouseup', () => {
+        const allInputs = document.querySelectorAll('.input');
+        if (allInputs.length > 0) {
+            const lastInput = allInputs[allInputs.length - 1];
+            lastInput.focus();
+        }
+    });
+
     const shellService = new ShellService();
     shellService.getData().then(data => {
         const shellController = new ShellController(shellView, data);
         shellView.setController(shellController);
-
         loading.style.display = 'none';
     })
 };
