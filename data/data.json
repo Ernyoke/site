@@ -19,7 +19,7 @@
           "type": "file",
           "lastModified": "12/24/2018 6:25 PM",
           "name": "delaunayimage.txt",
-          "content": "<div>DelaunayImage is tool which lets you generate artistic bitmap and/or vector graphic images using Delaunay triangulation algorithm. Source code: <a href=\"https://github.com/Ernyoke/DelaunayImage\">github</a></div>",
+          "content": "<div>DelaunayImage is tool written in Java which lets you generate artistic bitmap and vector graphic images using Delaunay triangulation algorithm. Source code: <a href=\"https://github.com/Ernyoke/DelaunayImage\">github</a></div>",
           "size": 10
         },
         {
@@ -54,7 +54,7 @@
           "type": "file",
           "lastModified": "12/24/2018  12:00 AM",
           "name": "coding.txt",
-          "content": "<div>I'm mostly interested in JVM languages like Java, Kotlin, etc. In the past I've done professionally C/C++ using MFC and Boost libraries. I'm not a big fan of dynamically typed languages, but I can get along with Javascript and Python. In my professional job/free time I've used extensively the following languages/frameworks: QT(C++ and PyQt), Android(using both Java and Kotlin), Angular(AngularJS as a full-stack developer at my current job, Angular2 and upwards in some private projects), Spring(extensive used in my current job, used in several home projects).</div>",
+          "content": "<div>I'm mostly interested in JVM languages like Java, Kotlin, etc. In the past I've done C/C++ professionally using MFC and Boost libraries. I'm not a big fan of dynamically typed languages, but I can get along with Javascript and Python. In my professional job/free time I've used extensively the following languages/frameworks: QT(C++ and PyQt), Android(usage of both Java and Kotlin), Angular(AngularJS as a full-stack developer at my current job, Angular2 and upwards in some private projects), Spring(extensively used at my current job, applied in several home projects).</div>",
           "size": 20
         }
       ]
