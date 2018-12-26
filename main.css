@@ -39,10 +39,9 @@ body {
     top: 30px;
     bottom: 0;
     overflow-y: scroll; }
-    .terminal-window .terminal .input {
+    .terminal-window .terminal .hidden .prompt .input {
       outline-color: #000000;
-      border: none;
-      display: inline-block; }
+      border: none; }
 
 footer {
   position: fixed;
