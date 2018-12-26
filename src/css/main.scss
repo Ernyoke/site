@@ -1,5 +1,11 @@
 @import 'colors';
 
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 body {
   background-color: $background;
 }
@@ -54,18 +60,28 @@ body {
     bottom: 0;
     overflow-y: scroll;
 
-    .hidden {
-      .prompt {
-        .input {
-          outline-color: $terminal-background;
-          border: none;
-        }
+    .input {
+      outline-color: $terminal-background;
+      border: none;
+      display: inline-block;
+    }
+
+    ul {
+      margin-left: 10px;
+      padding-left: 10px;
+      list-style-type: circle;
+    }
+
+    // hack for Firefox to be able to display cursor on the same line
+    @-moz-document url-prefix() {
+      .input {
+        display: inline;
       }
     }
   }
 
   .error {
-
+    color: $red;
   }
 }
 

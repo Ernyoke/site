@@ -114,7 +114,7 @@ export class ShellController {
             `<div>${whiteSpace(14)}${countNumberOfDirectories} Dir(s) ` +
             `${Math.floor((Math.random() * 1000) + 1000)} bytes free</div>` +
             '</div>';
-        this.shellView.showOutput(output);
+        this.shellView.showHtmlOutput(output);
     }
 
     // type [FILE]
@@ -127,7 +127,7 @@ export class ShellController {
             if (files < 1) {
                 throw Error(`File with the name ${filename} of does not exist!`);
             } else {
-                this.shellView.showOutput(files[0].content);
+                this.shellView.showHtmlOutput(files[0].content);
             }
         } else {
             throw Error('Missing argument from command "type"! Usage: type [FILENAME]')
@@ -173,7 +173,7 @@ export class ShellController {
             '<li>clear: Clear the current terminal input screen.  </li>' +
             '</ul>' +
             '</div>';
-        this.shellView.showOutput(output);
+        this.shellView.showHtmlOutput(output);
     }
 
     // pwd

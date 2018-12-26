@@ -61,14 +61,14 @@ export class ShellView {
             }
             // handle UP key event
             case 38: {
-                this.processGenericKeyEvent(event,(input) => {
+                this.processGenericKeyEvent(event, (input) => {
                     this.shellController.historyBefore(input);
                 });
                 break;
             }
             // handle DOWN key event
             case 40: {
-                this.processGenericKeyEvent(event,(input) => {
+                this.processGenericKeyEvent(event, (input) => {
                     this.shellController.historyAfter(input);
                 });
                 break;
@@ -83,31 +83,50 @@ export class ShellView {
         const prompt = event.target.parentNode || {};
         const newPrompt = prompt.cloneNode(true);
         const currentPath = this.shellController.computeCurrentPath();
-        const newPwd = newPrompt.querySelector('.pwd') || {};
-        newPwd.innerText = currentPath + '>';
-        const newInput = newPrompt.querySelector('.input') || {};
-        newInput.innerHTML = '';
-        prompt.setAttribute('contenteditable', false);
-        this.terminalWindow.appendChild(newPrompt);
-        newInput.focus();
+        const newPwd = newPrompt.querySelector('[data-js=pwd]');
+        if (!!newPwd) newPwd.innerText = currentPath + '>';
+        const newInput = newPrompt.querySelector('[data-js=input]');
+        if (!!newInput) {
+            newInput.innerHTML = '';
+            prompt.setAttribute('contenteditable', false);
+            this.terminalWindow.appendChild(newPrompt);
+            newInput.focus();
+        }
+        if (!newPwd) throw Error('Could not find [data-js=pwd]!');
+        if (!newInput) throw Error('Could not find [data-js=input]!');
     }
 
     setPrompt(command) {
-        const prompts = document.querySelectorAll('.prompt');
+        const prompts = document.querySelectorAll('[data-js=prompt]');
         if (prompts.length > 0) {
             const prompt = prompts[prompts.length - 1];
-            const input = prompt.querySelector('.input');
-            input.innerHTML = command;
-            input.focus();
+            const input = prompt.querySelector('[data-js=input]');
+            if (!!input) {
+                input.innerHTML = command;
+                input.focus();
+            } else {
+                throw Error('Could not find [data-js=input]!')
+            }
+        } else {
+            throw Error('Could not find [data-js=prompt]!')
         }
     }
 
+    showHtmlOutput(output) {
+        this.terminalWindow.innerHTML += (`${output} <br>`);
+    }
+
     showOutput(output) {
-        this.terminalWindow.innerHTML += (output + '<p></p>');
+        const span = document.createElement('span');
+        span.innerText += output;
+        this.terminalWindow.appendChild(span);
     }
 
     showError(errorMessage) {
-        this.terminalWindow.innerHTML += errorMessage;
+        const span = document.createElement('span');
+        span.classList.add('error');
+        span.innerText += errorMessage;
+        this.terminalWindow.appendChild(span);
     }
 
     clearScreen() {
@@ -116,30 +135,36 @@ export class ShellView {
 }
 
 const init = () => {
-    const terminalWindow = document.getElementsByClassName('terminal')[0] || {};
-    const loading = document.getElementById('loading') || {};
+    const terminal = document.querySelector('[data-js=terminal]');
+    const loading = document.querySelector('[data-js=loading]');
 
-    const shellView = new ShellView(terminalWindow);
+    if (!!terminal && !!loading) {
+        const shellView = new ShellView(terminal);
 
-    terminalWindow.addEventListener('keydown', (event) => {
-        shellView.keyPressEvent(event);
-    });
+        // Catch every keypress and handle it accordingly
+        terminal.addEventListener('keydown', (event) => {
+            shellView.keyPressEvent(event);
+        });
 
-    // Focus the last input whenever a click is done inside the terminal window.
-    terminalWindow.addEventListener('mouseup', () => {
-        const allInputs = document.querySelectorAll('.input');
-        if (allInputs.length > 0) {
-            const lastInput = allInputs[allInputs.length - 1];
-            lastInput.focus();
-        }
-    });
+        // Focus the last input whenever a click is done inside the terminal.
+        terminal.addEventListener('mouseup', () => {
+            const allInputs = document.querySelectorAll('[data-js=input]');
+            if (allInputs.length > 0) {
+                const lastInput = allInputs[allInputs.length - 1];
+                lastInput.focus();
+            }
+        });
 
-    const shellService = new ShellService();
-    shellService.getData().then(data => {
-        const shellController = new ShellController(shellView, data);
-        shellView.setController(shellController);
-        loading.style.display = 'none';
-    })
+        const shellService = new ShellService();
+        shellService.getData().then(data => {
+            const shellController = new ShellController(shellView, data);
+            shellView.setController(shellController);
+            loading.style.display = 'none';
+        })
+    }
+
+    if (!terminal) throw new Error("Could not find [data-js=terminal]!");
+    if (!loading) throw new Error("Could not find [data-js=loading]!");
 };
 
 init();
