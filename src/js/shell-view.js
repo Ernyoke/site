@@ -80,8 +80,8 @@ export class ShellView {
     }
 
     resetPrompt(event) {
-        const prompt = event.target || {};
-        const newPrompt = prompt.parentNode.cloneNode(true);
+        const prompt = event.target.parentNode || {};
+        const newPrompt = prompt.cloneNode(true);
         const currentPath = this.shellController.computeCurrentPath();
         const newPwd = newPrompt.querySelector('.pwd') || {};
         newPwd.innerText = currentPath + '>';
@@ -96,7 +96,7 @@ export class ShellView {
         const prompts = document.querySelectorAll('.prompt');
         if (prompts.length > 0) {
             const prompt = prompts[prompts.length - 1];
-            const input = prompt.parentNode.querySelector('.input');
+            const input = prompt.querySelector('.input');
             input.innerHTML = command;
             input.focus();
         }
