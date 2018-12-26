@@ -14,11 +14,23 @@ export class ShellController {
         this.currentDirectory = data;
         this.folderStack = [];
         this.commands = {
-            'dir': () => this.listContent(),
-            'cd': (args) => this.changeDirectory(args),
-            'type': (args) => this.cat(args),
-            'cls': () => this.clearScreen(),
-            'help': () => this.help()
+            dir: {
+                run: () => this.listContent(),
+            },
+            cd: {
+                run: (args) => this.changeDirectory(args),
+                argType: CONTENT_TYPE.DIR
+            },
+            type: {
+                run: (args) => this.cat(args),
+                argType: CONTENT_TYPE.FILE
+            },
+            cls: {
+                run: () => this.clearScreen()
+            },
+            help: {
+                run: () => this.help()
+            }
         };
         this.history = new LinkedList();
     }
@@ -34,13 +46,25 @@ export class ShellController {
         }
     }
 
-    estimateCommand(input) {
-
+    estimateCommand(input, position) {
+        if (!!input && input.match(/^([a-z]|[A-Z]).* */).length > 0) {
+            const cmd = input.slice(0, input.indexOf(' '));
+            const args = input.slice(cmd.length + 1);
+            if (this.commands.hasOwnProperty(cmd.toLowerCase())) {
+                const eligibleContent = this.currentDirectory.content.filter(item => {
+                    return item.type === this.commands[cmd].argType && item.name.startsWith(args.toLowerCase());
+                });
+                if (eligibleContent.length > 0) {
+                    let normalPosition = position % eligibleContent.length;
+                    this.shellView.setPrompt(`${cmd} ${eligibleContent[normalPosition].name}`);
+                }
+            }
+        }
     }
 
     parseCommand(command, args) {
         if (!!this.commands[command]) {
-            this.commands[command](args);
+            this.commands[command].run(args);
             this.history.last = [command, args];
         } else {
             throw Error('Nonexistent command!');
@@ -106,7 +130,7 @@ export class ShellController {
                 this.shellView.showOutput(files[0].content);
             }
         } else {
-            throw Error('Missing argument from command "cat"! Usage: cat [FILENAME]')
+            throw Error('Missing argument from command "type"! Usage: type [FILENAME]')
         }
     }
 
@@ -130,7 +154,7 @@ export class ShellController {
                 }
             }
         } else {
-            throw Error('Missing argument from command "cat"! Usage: cd [DIRNAME]')
+            throw Error('Missing argument from command "cd"! Usage: cd [DIRNAME]')
         }
     }
 

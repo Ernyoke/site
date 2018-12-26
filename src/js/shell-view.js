@@ -8,13 +8,15 @@ export class ShellView {
     constructor(terminalWindow) {
         this.shellController = null;
         this.terminalWindow = terminalWindow;
+        this.numberOfConsecutiveTabs = 0;
+        this.originalInput = '';
     }
 
     setController(shellController) {
         this.shellController = shellController;
     }
 
-    processKeyEvent(event, func) {
+    processGenericKeyEvent(event, func) {
         const prompt = event.target || {};
         const input = prompt.textContent.trim();
         try {
@@ -24,20 +26,34 @@ export class ShellView {
             this.showError(e.message);
         }
         event.preventDefault();
+        this.resetTabStatus();
+    }
+
+    processTabKeyEvent(event) {
+        if (this.numberOfConsecutiveTabs === 0) {
+            const prompt = event.target || {};
+            this.originalInput = prompt.textContent;
+        }
+        this.shellController.estimateCommand(this.originalInput, this.numberOfConsecutiveTabs);
+        this.numberOfConsecutiveTabs++;
+        event.preventDefault();
+    }
+
+    resetTabStatus() {
+        this.numberOfConsecutiveTabs = 0;
+        this.originalInput = '';
     }
 
     keyPressEvent(event) {
         switch (event.keyCode) {
             // handle TAB key event
             case 9: {
-                this.processKeyEvent(event, (input) => {
-                    this.shellController.estimateCommand(input);
-                });
+                this.processTabKeyEvent(event);
                 break;
             }
             // handle ENTER key event
             case 13: {
-                this.processKeyEvent(event, (input) => {
+                this.processGenericKeyEvent(event, (input) => {
                     this.shellController.processCommand(input);
                 });
                 this.resetPrompt(event);
@@ -45,17 +61,20 @@ export class ShellView {
             }
             // handle UP key event
             case 38: {
-                this.processKeyEvent(event,(input) => {
+                this.processGenericKeyEvent(event,(input) => {
                     this.shellController.historyBefore(input);
                 });
                 break;
             }
             // handle DOWN key event
             case 40: {
-                this.processKeyEvent(event,(input) => {
+                this.processGenericKeyEvent(event,(input) => {
                     this.shellController.historyAfter(input);
                 });
                 break;
+            }
+            default: {
+                this.resetTabStatus();
             }
         }
     }
