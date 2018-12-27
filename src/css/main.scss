@@ -10,29 +10,29 @@ body {
   background-color: $background;
 }
 
-.terminal-window {
+.terminal {
   text-align: left;
   width: 600px;
   height: 360px;
-  border-radius: 10px;
   margin: auto;
   position: relative;
   display: block;
   top: 25vh;
+  border: 1px solid $blue;
 
-  header {
+  .terminal__header {
     background: $header;
     height: 30px;
 
-    .window-title {
+    .header__title {
       float: left;
       padding: 8px 0 8px 8px;
 
-      #terminal-icon {
+      .title__icon {
         float: left;
       }
 
-      #terminal-title {
+      .title__content {
         padding-left: 5px;
         font-family: Consolas, "Courier New", Courier, serif;
         font-size: 10pt;
@@ -40,14 +40,45 @@ body {
       }
     }
 
-    .button {
-      margin: 7px 10px;
+    .header__button {
+      height: inherit;
       float: right;
-      width: 20px;
+      width: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      svg {
+        line {
+          stroke-width: 1px;
+          stroke: black;
+        }
+        rect {
+          stroke-width: 2px;
+          stroke: black;
+        }
+      }
+
+      &:hover {
+        background: $light-grey;
+      }
+    }
+
+    .header__button--close {
+      @extend .header__button;
+
+      &:hover {
+        background: $dark-red;
+        svg {
+          line {
+            stroke: white;
+          }
+        }
+      }
     }
   }
 
-  .terminal {
+  .terminal__body {
     color: white;
     font-family: Consolas, "Courier New", Courier, serif;
     font-size: 10pt;
@@ -60,7 +91,7 @@ body {
     bottom: 0;
     overflow-y: scroll;
 
-    .input {
+    .body__input {
       outline-color: $terminal-background;
       border: none;
       display: inline-block;
@@ -74,27 +105,26 @@ body {
 
     // hack for Firefox to be able to display cursor on the same line
     @-moz-document url-prefix() {
-      .input {
+      .body__input {
         display: inline;
       }
     }
   }
 
-  .error {
+  .body__error {
     color: $red;
   }
 }
 
-footer {
+.footer {
   position: fixed;
   bottom: 0;
   text-align: center;
-  line-height: 0.1px;
+  line-height: 0.1;
   width: 100%;
   color: white;
 
-  .site-code {
-    font-weight: bold;
-    color: lightblue;
+  &__site-code {
+    color: white;
   }
 }

@@ -83,9 +83,9 @@ export class ShellView {
         const prompt = event.target.parentNode || {};
         const newPrompt = prompt.cloneNode(true);
         const currentPath = this.shellController.computeCurrentPath();
-        const newPwd = newPrompt.querySelector('[data-js=pwd]');
+        const newPwd = newPrompt.querySelector('[data-js=prompt-pwd]');
         if (!!newPwd) newPwd.innerText = currentPath + '>';
-        const newInput = newPrompt.querySelector('[data-js=input]');
+        const newInput = newPrompt.querySelector('[data-js=prompt-input]');
         if (!!newInput) {
             newInput.innerHTML = '';
             prompt.setAttribute('contenteditable', false);
@@ -100,7 +100,7 @@ export class ShellView {
         const prompts = document.querySelectorAll('[data-js=prompt]');
         if (prompts.length > 0) {
             const prompt = prompts[prompts.length - 1];
-            const input = prompt.querySelector('[data-js=input]');
+            const input = prompt.querySelector('[data-js=prompt-input]');
             if (!!input) {
                 input.innerHTML = command;
                 input.focus();
@@ -131,7 +131,7 @@ export class ShellView {
 
     showError(errorMessage) {
         const span = document.createElement('span');
-        span.classList.add('error');
+        span.classList.add('body__error');
         span.innerText += errorMessage;
         this.terminalWindow.appendChild(span);
     }
@@ -142,7 +142,7 @@ export class ShellView {
 }
 
 const init = () => {
-    const terminal = document.querySelector('[data-js=terminal]');
+    const terminal = document.querySelector('[data-js=terminal-body]');
     const loading = document.querySelector('[data-js=loading]');
 
     if (!!terminal && !!loading) {
@@ -188,7 +188,7 @@ const init = () => {
         });
     }
 
-    if (!terminal) throw new Error("Could not find [data-js=terminal]!");
+    if (!terminal) throw new Error("Could not find [data-js=terminal-body]!");
     if (!loading) throw new Error("Could not find [data-js=loading]!");
 };
 
