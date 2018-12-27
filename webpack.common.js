@@ -94,5 +94,8 @@ module.exports = {
         new CopyWebpackPlugin([
             {from: './data', to: 'data'}
         ]),
+        new CopyWebpackPlugin([
+            {from: './src/img/fav_icon.png', to: 'img/fav_icon.png'}
+        ])
     ]
 };
