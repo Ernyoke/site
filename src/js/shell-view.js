@@ -104,6 +104,13 @@ export class ShellView {
             if (!!input) {
                 input.innerHTML = command;
                 input.focus();
+                // Move the cursor at the end of the text.
+                const range = document.createRange();
+                range.selectNodeContents(input);
+                range.collapse(false);
+                const selection = window.getSelection();
+                selection.removeAllRanges();
+                selection.addRange(range);
             } else {
                 throw Error('Could not find [data-js=input]!')
             }
