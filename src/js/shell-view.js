@@ -166,8 +166,26 @@ const init = () => {
         shellService.getData().then(data => {
             const shellController = new ShellController(shellView, data);
             shellView.setController(shellController);
+        }).catch(() => {
+            const data = {
+                type: 'dir',
+                astModified: '09/15/2018  02:39 PM',
+                name: '',
+                content: [
+                    {
+                        type: 'file',
+                        lastModified: '12/27/2018 6:20 PM',
+                        name: 'error.txt',
+                        content: 'Could not retrieve data from the host. Please try again by refreshing the page.',
+                        size: 6
+                    },
+                ]
+            };
+            const shellController = new ShellController(shellView, data);
+            shellView.setController(shellController);
+        }).finally(() => {
             loading.style.display = 'none';
-        })
+        });
     }
 
     if (!terminal) throw new Error("Could not find [data-js=terminal]!");

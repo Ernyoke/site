@@ -7,7 +7,7 @@ export class ShellService {
         return fetch(RESOURCE).then(resp =>  {
             return resp.json();
         }).catch(err => {
-            console.error(err);
+            console.error(err.json());
         });
     }
 }
