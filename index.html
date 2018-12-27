@@ -8,37 +8,37 @@
     <title>Cli</title>
 <link href="main.css" rel="stylesheet"></head>
 <body>
-<div class="terminal-window">
-    <header>
-        <div class="window-title">
-            <img id="terminal-icon" src="img/terminal_icon.png" alt="terminal icon"/>
-            <div id="terminal-title">Command prompt</div>
+<div class="terminal">
+    <header class="terminal__header">
+        <div class="header__title">
+            <img class="title__icon" src="img/terminal_icon.png" alt="terminal icon"/>
+            <div class="title__content">Command Prompt</div>
         </div>
-        <div class="button">
+        <div class="header__button--close">
             <svg height="12" width="12">
-                <line x1="0" y1="0" x2="12" y2="12" style="stroke:rgb(0,0,0); stroke-width:1px"></line>
-                <line x1="0" y1="12" x2="12" y2="0" style="stroke:rgb(0,0,0); stroke-width:1px"></line>
+                <line x1="0" y1="0" x2="12" y2="12"></line>
+                <line x1="0" y1="12" x2="12" y2="0"></line>
             </svg>
         </div>
-        <div class="button">
-            <svg width="12" height="12">
-                <rect width="12" height="12" style="stroke-width:2px; stroke:rgb(0,0,0)" fill="none"></rect>
+        <div class="header__button">
+            <svg width="12" height="12" class="button__content">
+                <rect width="12" height="12" fill="none"></rect>
             </svg>
         </div>
-        <div class="button">
+        <div class="header__button">
             <svg height="12" width="12">
-                <line x1="0" y1="6" x2="12" y2="6" style="stroke:rgb(0,0,0); stroke-width:1px"></line>
+                <line x1="0" y1="6" x2="12" y2="6"></line>
             </svg>
         </div>
     </header>
-    <div class="terminal" data-js="terminal">
+    <div class="terminal__body" data-js="terminal-body">
         <div>CLI [Version 1.0.0]</div>
         <div>(c) 2018 Ervin Szilagyi. All rights reserved.</div>
         <div>Type `help` to get started.</div>
         <br>
         <div data-js="prompt">
-            <span data-js="pwd">C:\></span>
-            <span data-js="input" class="input" contenteditable="true"></span>
+            <span data-js="prompt-pwd">C:\></span>
+            <span data-js="prompt-input" class="body__input" contenteditable="true"></span>
         </div>
     </div>
 </div>
@@ -47,13 +47,13 @@
     <p>Loading...</p>
 </div>
 
-<footer>
-    <a class="site-code" href="https://github.com/Ernyoke/site"><span class="fa fa-github"></span></a>
-    <a class="site-code" href="https://www.linkedin.com/in/szilagyiervin/"><span class="fa fa-linkedin"></span></a>
-    <a class="site-code" href="https://stackoverflow.com/users/7661119/ervin-szilagyi"><span
+<footer class="footer">
+    <a class="footer__site-code" href="https://github.com/Ernyoke/site"><span class="fa fa-github"></span></a>
+    <a class="footer__site-code" href="https://www.linkedin.com/in/szilagyiervin/"><span class="fa fa-linkedin"></span></a>
+    <a class="footer__site-code" href="https://stackoverflow.com/users/7661119/ervin-szilagyi"><span
             class="fa fa-stack-overflow"></span></a>
-    <a class="site-code" href="https://twitter.com/ervin_szilagyi"><span class="fa fa-twitter"></span></a>
-    <a class="site-code" href="https://bitbucket.org/ervin_szilagyi/"><span class="fa fa-bitbucket"></span></a>
+    <a class="footer__site-code" href="https://twitter.com/ervin_szilagyi"><span class="fa fa-twitter"></span></a>
+    <a class="footer__site-code" href="https://bitbucket.org/ervin_szilagyi/"><span class="fa fa-bitbucket"></span></a>
 </footer>
 
 <script type="text/javascript" src="bundle.js"></script></body>

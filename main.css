@@ -6,37 +6,52 @@
 body {
   background-color: #297198; }
 
-.terminal-window {
+.terminal {
   text-align: left;
   width: 600px;
   height: 360px;
-  border-radius: 10px;
   margin: auto;
   position: relative;
   display: block;
-  top: 25vh; }
-  .terminal-window header {
-    background: #FFFFFF;
+  top: 25vh;
+  border: 1px solid #1883d7; }
+  .terminal .terminal__header {
+    background: white;
     height: 30px; }
-    .terminal-window header .window-title {
+    .terminal .terminal__header .header__title {
       float: left;
       padding: 8px 0 8px 8px; }
-      .terminal-window header .window-title #terminal-icon {
+      .terminal .terminal__header .header__title .title__icon {
         float: left; }
-      .terminal-window header .window-title #terminal-title {
+      .terminal .terminal__header .header__title .title__content {
         padding-left: 5px;
         font-family: Consolas, "Courier New", Courier, serif;
         font-size: 10pt;
         float: left; }
-    .terminal-window header .button {
-      margin: 7px 10px;
+    .terminal .terminal__header .header__button, .terminal .terminal__header .header__button--close {
+      height: inherit;
       float: right;
-      width: 20px; }
-  .terminal-window .terminal {
+      width: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center; }
+      .terminal .terminal__header .header__button svg line, .terminal .terminal__header .header__button--close svg line {
+        stroke-width: 1px;
+        stroke: black; }
+      .terminal .terminal__header .header__button svg rect, .terminal .terminal__header .header__button--close svg rect {
+        stroke-width: 2px;
+        stroke: black; }
+      .terminal .terminal__header .header__button:hover, .terminal .terminal__header .header__button--close:hover {
+        background: #d3d3d3; }
+    .terminal .terminal__header .header__button--close:hover {
+      background: #e81123; }
+      .terminal .terminal__header .header__button--close:hover svg line {
+        stroke: white; }
+  .terminal .terminal__body {
     color: white;
     font-family: Consolas, "Courier New", Courier, serif;
     font-size: 10pt;
-    background: #000000;
+    background: black;
     padding: 2px;
     box-sizing: border-box;
     position: absolute;
@@ -44,31 +59,30 @@ body {
     top: 30px;
     bottom: 0;
     overflow-y: scroll; }
-    .terminal-window .terminal .input {
-      outline-color: #000000;
+    .terminal .terminal__body .body__input {
+      outline-color: black;
       border: none;
       display: inline-block; }
-    .terminal-window .terminal ul {
+    .terminal .terminal__body ul {
       margin-left: 10px;
       padding-left: 10px;
       list-style-type: circle; }
 
 @-moz-document url-prefix() {
-  .terminal-window .terminal .input {
+  .terminal .terminal__body .body__input {
     display: inline; } }
-  .terminal-window .error {
+  .terminal .body__error {
     color: #e75448; }
 
-footer {
+.footer {
   position: fixed;
   bottom: 0;
   text-align: center;
-  line-height: 0.1px;
+  line-height: 0.1;
   width: 100%;
   color: white; }
-  footer .site-code {
-    font-weight: bold;
-    color: lightblue; }
+  .footer__site-code {
+    color: white; }
 
 @charset "UTF-8";
 /*!

@@ -26,7 +26,7 @@
           "type": "file",
           "lastModified": "12/24/2018 6:30 PM",
           "name": "artistic_video_gui.txt",
-          "content": "The project's goal was the develop a GUI application where the user can transfer the artistic style from well known pictures painted by hungarian artists to their chosen images\\videos. Source code: <a href=\"https://github.com/Ernyoke/Artistic_video_GUI\">github</a></div>",
+          "content": "<div>The project's goal was the develop a GUI application where the user can transfer the artistic style from well known pictures painted by hungarian artists to their chosen images\\videos. Source code: <a href=\"https://github.com/Ernyoke/Artistic_video_GUI\">github</a></div>",
           "size": 12
         }
       ]
@@ -70,7 +70,7 @@
       "lastModified": "09/15/2018  02:39 PM",
       "size": "32",
       "name": "about.txt",
-      "content": "My name is Ervin Szilagyi. I'm a software engineer currently working for Endava Romania as a full-stack developer. I have a bachelor's degree in computer science and a master's degree in software engineering, both from Sapientia Hungarian University of Transylvania. I'm interested in micro-services and computer security."
+      "content": "<div>My name is Ervin Szilagyi. I'm a software engineer currently working for Endava Romania as a full-stack developer. I have a bachelor's degree in computer science and a master's degree in software engineering, both from Sapientia Hungarian University of Transylvania. I'm interested in micro-services and computer security.</div>"
     },
     {
       "type": "file",
