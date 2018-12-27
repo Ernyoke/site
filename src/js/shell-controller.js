@@ -8,39 +8,51 @@ const CONTENT_TYPE = {
     DIR: 'dir'
 };
 
+const COMMAND = {
+    EMPTY: '',
+    DIR: 'dir',
+    CD: 'cd',
+    TYPE: 'type',
+    CLS: 'cls',
+    HELP: 'help'
+};
+
 export class ShellController {
     constructor(shellView, data) {
         this.shellView = shellView;
         this.currentDirectory = data;
         this.folderStack = [];
-        this.commands = {
-            dir: {
+        this.commandMap = new Map([
+            [COMMAND.EMPTY, {
+                run: () => undefined
+            }],
+            [COMMAND.DIR, {
                 run: () => this.listContent(),
-            },
-            cd: {
+            }],
+            [COMMAND.CD, {
                 run: (args) => this.changeDirectory(args),
                 argType: CONTENT_TYPE.DIR
-            },
-            type: {
+            }],
+            [COMMAND.TYPE, {
                 run: (args) => this.cat(args),
                 argType: CONTENT_TYPE.FILE
-            },
-            cls: {
+            }],
+            [COMMAND.CLS, {
                 run: () => this.clearScreen()
-            },
-            help: {
+            }],
+            [COMMAND.HELP, {
                 run: () => this.help()
-            }
-        };
+            }]
+        ]);
         this.history = new LinkedList();
     }
 
     processCommand(input) {
-        const words = input.trim().split(' ');
+        const words = input.trim().toLowerCase().split(' ');
         let command = '';
         let args = [];
         if (words.length > 0) {
-            command = words[0].toLowerCase();
+            command = words[0];
             args.push(...words.slice(1));
             this.parseCommand(command, args);
         }
@@ -48,11 +60,10 @@ export class ShellController {
 
     estimateCommand(input, position) {
         if (!!input && input.match(/^([a-z]|[A-Z]).* */).length > 0) {
-            const cmd = input.slice(0, input.indexOf(' '));
-            const args = input.slice(cmd.length + 1);
-            if (this.commands.hasOwnProperty(cmd.toLowerCase())) {
+            const [cmd, args] = input.toLowerCase().split(/\s(.+)/);
+            if (this.commandMap.has(cmd)) {
                 const eligibleContent = this.currentDirectory.content.filter(item => {
-                    return item.type === this.commands[cmd].argType && item.name.startsWith(args.toLowerCase());
+                    return item.type === this.commandMap.get(cmd).argType && item.name.startsWith(args);
                 });
                 if (eligibleContent.length > 0) {
                     let normalPosition = position % eligibleContent.length;
@@ -63,8 +74,8 @@ export class ShellController {
     }
 
     parseCommand(command, args) {
-        if (!!this.commands[command]) {
-            this.commands[command].run(args);
+        if (this.commandMap.has(command)) {
+            this.commandMap.get(command).run(args);
             this.history.last = [command, args];
         } else {
             throw Error('Nonexistent command!');
