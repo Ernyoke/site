@@ -60,14 +60,34 @@ export class ShellController {
 
     estimateCommand(input, position) {
         if (!!input && input.match(/^([a-z]|[A-Z]).* */).length > 0) {
-            const [cmd, args] = input.toLowerCase().split(/\s(.+)/);
-            if (this.commandMap.has(cmd)) {
-                const eligibleContent = this.currentDirectory.content.filter(item => {
-                    return item.type === this.commandMap.get(cmd).argType && item.name.startsWith(args);
-                });
-                if (eligibleContent.length > 0) {
-                    let normalPosition = position % eligibleContent.length;
-                    this.shellView.setPrompt(`${cmd} ${eligibleContent[normalPosition].name}`);
+            // Get the index of the first space. The span input distinguishes between non breaking space and normal space,
+            // this means whe have to get the minimum index of a space where the index itself is positive (the space
+            // exists inside the input string).
+            const indexOfFirstNonBreakingSpace = input.indexOf('\u00A0');
+            const indexOfFirstNormalSpace = input.indexOf(' ');
+            let indexOfSpace;
+            if (indexOfFirstNonBreakingSpace > -1) {
+                if (indexOfFirstNormalSpace > -1) {
+                    indexOfSpace = indexOfFirstNonBreakingSpace < indexOfFirstNormalSpace ? indexOfFirstNonBreakingSpace : indexOfFirstNormalSpace;
+                } else {
+                    indexOfSpace = indexOfFirstNonBreakingSpace;
+                }
+            } else {
+                if (indexOfFirstNormalSpace > -1) {
+                    indexOfSpace = indexOfFirstNormalSpace;
+                }
+            }
+            if (!!indexOfSpace) {
+                const cmd = input.substring(0, indexOfSpace).toLowerCase();
+                const args = input.substring(indexOfSpace + 1).toLowerCase();
+                if (this.commandMap.has(cmd)) {
+                    const eligibleContent = this.currentDirectory.content.filter(item => {
+                        return item.type === this.commandMap.get(cmd).argType && item.name.startsWith(args);
+                    });
+                    if (eligibleContent.length > 0) {
+                        let normalPosition = position % eligibleContent.length;
+                        this.shellView.setPrompt(`${cmd} ${eligibleContent[normalPosition].name}`);
+                    }
                 }
             }
         }
@@ -152,6 +172,7 @@ export class ShellController {
             if (directoryName === '..') {
                 if (this.folderStack.length > 0) {
                     this.currentDirectory = this.folderStack.pop();
+                    this.shellView.showHtmlOutput('');
                 }
             } else {
                 let dirs = this.currentDirectory.content.filter((item) => {
@@ -162,6 +183,7 @@ export class ShellController {
                 } else {
                     this.folderStack.push(this.currentDirectory);
                     this.currentDirectory = dirs[0];
+                    this.shellView.showHtmlOutput('');
                 }
             }
         } else {

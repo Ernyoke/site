@@ -93,7 +93,7 @@ export class ShellView {
             newInput.focus();
         }
         if (!newPwd) throw Error('Could not find [data-js=pwd]!');
-        if (!newInput) throw Error('Could not find [data-js=input]!');
+        if (!newInput) throw Error('Could not find [data-js=prompt-input]!');
     }
 
     setPrompt(command) {
@@ -155,10 +155,12 @@ const init = () => {
 
         // Focus the last input whenever a click is done inside the terminal.
         terminal.addEventListener('mouseup', () => {
-            const allInputs = document.querySelectorAll('[data-js=input]');
+            const allInputs = document.querySelectorAll('[data-js=prompt-input]');
             if (allInputs.length > 0) {
                 const lastInput = allInputs[allInputs.length - 1];
                 lastInput.focus();
+            } else {
+                throw new Error("Could not find [data-js=prompt-input]!");
             }
         });
 
