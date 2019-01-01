@@ -2,6 +2,7 @@
 
 import {formatNumber, whiteSpace} from './utils'
 import {LinkedList} from "./linked-list";
+import {comareArrays} from "./utils";
 
 const CONTENT_TYPE = {
     FILE: 'file',
@@ -47,17 +48,6 @@ export class ShellController {
         this.history = new LinkedList();
     }
 
-    processCommand(input) {
-        const words = input.trim().toLowerCase().split(' ');
-        let command = '';
-        let args = [];
-        if (words.length > 0) {
-            command = words[0];
-            args.push(...words.slice(1));
-            this.parseCommand(command, args);
-        }
-    }
-
     estimateCommand(input, position) {
         if (!!input && input.match(/^([a-z]|[A-Z]).* */).length > 0) {
             // Get the index of the first space. The span input distinguishes between non breaking space and normal space,
@@ -93,12 +83,24 @@ export class ShellController {
         }
     }
 
-    parseCommand(command, args) {
-        if (this.commandMap.has(command)) {
-            this.commandMap.get(command).run(args);
-            this.history.last = [command, args];
-        } else {
-            throw Error('Nonexistent command!');
+    processCommand(input) {
+        const rawInput = input.trim().toLowerCase();
+        const words = rawInput.split(' ');
+        if (words.length > 0) {
+            const command = words[0];
+            const args = [];
+            args.push(...words.slice(1));
+            if (this.commandMap.has(command)) {
+                this.commandMap.get(command).run(args);
+                const latestCommand = !!this.history.last ? this.history.last.value : [];
+                if (command !== COMMAND.EMPTY &&
+                    (command !== latestCommand[0] ||
+                    !comareArrays(args, latestCommand[1], (a, b) => a === b))) {
+                    this.history.last = [command, args];
+                }
+            } else {
+                throw Error('Nonexistent command!');
+            }
         }
     }
 

@@ -17,4 +17,20 @@ const whiteSpace = count => {
     return str;
 };
 
-export {formatNumber, whiteSpace};
+const comareArrays = (a, b, equals) => {
+    if (!!a && !!b) {
+        if (a.length === b.length) {
+            for (let i = 0; i < a.length; i++) {
+                if (!equals(a[i], b[i])) {
+                    return false;
+                }
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+    return a === b;
+};
+
+export {formatNumber, whiteSpace, comareArrays};
