@@ -84,8 +84,7 @@ export class ShellController {
     }
 
     processCommand(input) {
-        const rawInput = input.trim().toLowerCase();
-        const words = rawInput.split(' ');
+        const words = input.trim().toLowerCase().split(' ');
         if (words.length > 0) {
             const command = words[0];
             const args = [];
