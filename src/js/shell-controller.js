@@ -204,7 +204,7 @@ export class ShellController {
             '<li>dir: List the content of the current directory. Equivalent of "ls" command under Unix systems.</li>' +
             '<li>type: Show the content of a file. Equivalent of "cat" command under Unix systems. Usage: type [FILENAME]</li>' +
             '<li>cd: Navigate into a selected directory. Usage: cd [DIRNAME]. To navigate up: cd ..  </li>' +
-            '<li>cls: Clear the current of the terminal input screen.  </li>' +
+            '<li>cls: Clear the terminal input screen.  </li>' +
             '</ul>' +
             '</div>';
         this.shellView.showHtmlOutput(output);
