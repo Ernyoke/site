@@ -8,123 +8,160 @@
 
 body {
   background-color: $background;
-}
 
-.terminal {
-  text-align: left;
-  width: 600px;
-  height: 360px;
-  margin: auto;
-  position: relative;
-  display: block;
-  top: 25vh;
-  border: 1px solid $blue;
+  .terminal {
+    position: absolute;
+    z-index: 9;
+    text-align: left;
+    margin: auto;
+    display: block;
+    border: 1px solid $blue;
 
-  .terminal__header {
-    background: $header;
-    height: 30px;
+    .terminal__header {
+      background: $header;
+      height: 30px;
 
-    .header__title {
-      float: left;
-      padding: 8px 0 8px 8px;
-
-      .title__icon {
+      .header__title {
         float: left;
-      }
+        padding: 8px 0 8px 8px;
 
-      .title__content {
-        padding-left: 5px;
-        font-family: Consolas, "Courier New", Courier, serif;
-        font-size: 10pt;
-        float: left;
-      }
-    }
-
-    .header__button {
-      height: inherit;
-      float: right;
-      width: 45px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      svg {
-        line {
-          stroke-width: 1px;
-          stroke: black;
+        .title__icon {
+          float: left;
         }
-        rect {
-          stroke-width: 2px;
-          stroke: black;
+
+        .title__content {
+          padding-left: 5px;
+          font-family: Consolas, "Courier New", Courier, serif;
+          font-size: 10pt;
+          float: left;
         }
       }
 
-      &:hover {
-        background: $light-grey;
-      }
-    }
+      .header__button {
+        height: inherit;
+        float: right;
+        width: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
-    .header__button--close {
-      @extend .header__button;
-
-      &:hover {
-        background: $dark-red;
         svg {
           line {
-            stroke: white;
+            stroke-width: 1px;
+            stroke: black;
+          }
+
+          rect {
+            stroke-width: 2px;
+            stroke: black;
+          }
+        }
+
+        &:hover {
+          background: $light-grey;
+        }
+      }
+
+      .header__button--close {
+        @extend .header__button;
+
+        &:hover {
+          background: $dark-red;
+
+          svg {
+            line {
+              stroke: white;
+            }
           }
         }
       }
     }
-  }
 
-  .terminal__body {
-    color: white;
-    font-family: Consolas, "Courier New", Courier, serif;
-    font-size: 10pt;
-    background: $terminal-background;
-    padding: 2px;
-    box-sizing: border-box;
-    position: absolute;
-    width: 100%;
-    top: 30px;
-    bottom: 0;
-    overflow-y: scroll;
+    .terminal__body {
+      color: white;
+      font-family: Consolas, "Courier New", Courier, serif;
+      font-size: 10pt;
+      background: $terminal-background;
+      padding: 2px;
+      box-sizing: border-box;
+      position: absolute;
+      width: 100%;
+      top: 30px;
+      bottom: 0;
+      overflow-y: scroll;
 
-    .body__input {
-      outline-color: $terminal-background;
-      border: none;
-      display: inline-block;
-    }
-
-    ul {
-      margin-left: 10px;
-      padding-left: 10px;
-      list-style-type: circle;
-    }
-
-    // hack for Firefox to be able to display cursor on the same line
-    @-moz-document url-prefix() {
       .body__input {
-        display: inline;
+        outline-color: $terminal-background;
+        border: none;
+        display: inline-block;
+      }
+
+      ul {
+        margin-left: 10px;
+        padding-left: 10px;
+        list-style-type: circle;
+      }
+
+      // hack for Firefox to be able to display cursor on the same line
+      @-moz-document url-prefix() {
+        .body__input {
+          display: inline;
+        }
       }
     }
+
+    .body__error {
+      color: $red;
+    }
   }
 
-  .body__error {
-    color: $red;
-  }
-}
 
-.footer {
-  position: fixed;
-  bottom: 0;
-  text-align: center;
-  line-height: 0.1;
-  width: 100%;
-  color: white;
-
-  &__site-code {
+  .footer {
+    position: fixed;
+    bottom: 0;
+    text-align: center;
+    line-height: 0.1;
+    width: 100%;
     color: white;
+
+    &__site-code {
+      color: white;
+    }
+  }
+
+  @media only screen and (max-width: 600px) {
+    .terminal {
+      width: 90vw;
+      height: 360px;
+      top: 25vh;
+      left: 5vw;
+    }
+  }
+
+  @media only screen and (min-width: 600px) {
+    .terminal {
+      width: 80vw;
+      height: 360px;
+      top: 25vh;
+      left: 10vw;
+    }
+  }
+
+  @media only screen and (min-width: 768px) {
+    .terminal {
+      width: 70vw;
+      height: 360px;
+      top: 25vh;
+      left: 15vw;
+    }
+  }
+
+  @media only screen and (min-width: 992px) {
+    .terminal {
+      width: 600px;
+      height: 360px;
+      top: 25vh;
+      left: 25vw;
+    }
   }
 }

@@ -5,11 +5,15 @@ import {ShellController} from './shell-controller';
 import {ShellService} from './shell-service';
 
 export class ShellView {
-    constructor(terminalWindow) {
+    constructor(terminalHeader, terminalBody, terminal) {
         this.shellController = null;
-        this.terminalWindow = terminalWindow;
+        this.terminalHeader = terminalHeader;
+        this.terminalBody = terminalBody;
+        this.termial = terminal;
         this.numberOfConsecutiveTabs = 0;
         this.originalInput = '';
+
+        this.makeTerminalDraggable();
     }
 
     setController(shellController) {
@@ -89,7 +93,7 @@ export class ShellView {
         if (!!newInput) {
             newInput.innerHTML = '';
             prompt.setAttribute('contenteditable', false);
-            this.terminalWindow.appendChild(newPrompt);
+            this.terminalBody.appendChild(newPrompt);
             newInput.focus();
         }
         if (!newPwd) throw Error('Could not find [data-js=pwd]!');
@@ -120,77 +124,123 @@ export class ShellView {
     }
 
     showHtmlOutput(output) {
-        this.terminalWindow.innerHTML += (`${output} <br>`);
+        this.terminalBody.innerHTML += (`${output} <br>`);
     }
 
     showOutput(output) {
         const span = document.createElement('span');
         span.innerText += output;
-        this.terminalWindow.appendChild(span);
+        this.terminalBody.appendChild(span);
     }
 
     showError(errorMessage) {
         const span = document.createElement('span');
         span.classList.add('body__error');
         span.innerText += errorMessage;
-        this.terminalWindow.appendChild(span);
+        this.terminalBody.appendChild(span);
     }
 
     clearScreen() {
-        this.terminalWindow.innerHTML = '';
+        this.terminalBody.innerHTML = '';
+    }
+
+    makeTerminalDraggable() {
+        let pos1 = 0;
+        let pos2 = 0;
+        let pos3 = 0;
+        let pos4 = 0;
+        this.terminalHeader.onmousedown = (e) => {
+            e = e || window.event;
+            e.preventDefault();
+            // get the mouse cursor position at startup:
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+            document.onmouseup = closeDragElement;
+            // call a function whenever the cursor moves:
+            document.onmousemove = elementDrag;
+        };
+
+        const elementDrag = (e) => {
+            e = e || window.event;
+            e.preventDefault();
+            // calculate the new cursor position:
+            pos1 = pos3 - e.clientX;
+            pos2 = pos4 - e.clientY;
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+            // set the element's new position:
+            this.termial.style.top = (this.termial.offsetTop - pos2) + "px";
+            this.termial.style.left = (this.termial.offsetLeft - pos1) + "px";
+            console.log("TOP:", this.termial.style.top);
+            console.log("LEFT:", this.termial.style.left);
+        };
+
+        function closeDragElement() {
+            // stop moving when mouse button is released:
+            document.onmouseup = null;
+            document.onmousemove = null;
+        }
     }
 }
 
 const init = () => {
-    const terminal = document.querySelector('[data-js=terminal-body]');
+    const terminal = document.querySelector('[data-js=terminal]');
     const loading = document.querySelector('[data-js=loading]');
 
     if (!!terminal && !!loading) {
-        const shellView = new ShellView(terminal);
+        const terminalHeader = terminal.querySelector('[data-js=terminal-header]');
+        const terminalBody = terminal.querySelector('[data-js=terminal-body]');
 
-        // Catch every keypress and handle it accordingly
-        terminal.addEventListener('keydown', (event) => {
-            shellView.keyPressEvent(event);
-        });
+        if (!!terminalHeader && !!terminalBody) {
+            const shellView = new ShellView(terminalHeader, terminalBody, terminal);
 
-        // Focus the last input whenever a click is done inside the terminal.
-        terminal.addEventListener('mouseup', () => {
-            const allInputs = document.querySelectorAll('[data-js=prompt-input]');
-            if (allInputs.length > 0) {
-                const lastInput = allInputs[allInputs.length - 1];
-                lastInput.focus();
-            } else {
-                throw new Error("Could not find [data-js=prompt-input]!");
-            }
-        });
+            // Catch every keypress and handle it accordingly
+            terminal.addEventListener('keydown', (event) => {
+                shellView.keyPressEvent(event);
+            });
 
-        const shellService = new ShellService();
-        shellService.getData().then(data => {
-            const shellController = new ShellController(shellView, data);
-            shellView.setController(shellController);
-        }).catch(() => {
-            const data = {
-                type: 'dir',
-                astModified: '09/15/2018  02:39 PM',
-                name: '',
-                content: [
-                    {
-                        type: 'file',
-                        lastModified: '12/27/2018 6:20 PM',
-                        name: 'error.txt',
-                        content: 'Could not retrieve data from the host. Please try again by refreshing the page.',
-                        size: 6
-                    },
-                ]
-            };
-            const shellController = new ShellController(shellView, data);
-            shellView.setController(shellController);
-        }).finally(() => {
-            loading.style.display = 'none';
-        });
+
+            // Focus the last input whenever a click is done inside the terminal.
+            terminal.addEventListener('mouseup', () => {
+                const allInputs = document.querySelectorAll('[data-js=prompt-input]');
+                if (allInputs.length > 0) {
+                    const lastInput = allInputs[allInputs.length - 1];
+                    lastInput.focus();
+                } else {
+                    throw new Error("Could not find [data-js=prompt-input]!");
+                }
+            });
+
+            const shellService = new ShellService();
+            shellService.getData().then(data => {
+                const shellController = new ShellController(shellView, data);
+                shellView.setController(shellController);
+            }).catch(() => {
+                const data = {
+                    type: 'dir',
+                    astModified: '09/15/2018  02:39 PM',
+                    name: '',
+                    content: [
+                        {
+                            type: 'file',
+                            lastModified: '12/27/2018 6:20 PM',
+                            name: 'error.txt',
+                            content: 'Could not retrieve data from the host. Please try again by refreshing the page.',
+                            size: 6
+                        },
+                    ]
+                };
+                const shellController = new ShellController(shellView, data);
+                shellView.setController(shellController);
+            }).finally(() => {
+                loading.style.display = 'none';
+            });
+        }
+        if (!terminalHeader) throw new Error("Could not find [data-js=terminal-header]!");
+        if (!terminalBody) throw new Error("Could not find [data-js=terminal-body]!");
     }
 
-    if (!terminal) throw new Error("Could not find [data-js=terminal-body]!");
+    if (!terminal) throw new Error("Could not find [data-js=terminal]!");
     if (!loading) throw new Error("Could not find [data-js=loading]!");
 };
 
