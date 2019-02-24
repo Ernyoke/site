@@ -145,41 +145,34 @@ export class ShellView {
     }
 
     makeTerminalDraggable() {
-        let pos1 = 0;
-        let pos2 = 0;
-        let pos3 = 0;
-        let pos4 = 0;
+        let newPositionX = 0;
+        let newPositionY = 0;
+        let initialPositionX = 0;
+        let initialPositionY = 0;
         this.terminalHeader.onmousedown = (e) => {
             e = e || window.event;
             e.preventDefault();
-            // get the mouse cursor position at startup:
-            pos3 = e.clientX;
-            pos4 = e.clientY;
+            initialPositionX = e.clientX;
+            initialPositionY = e.clientY;
             document.onmouseup = closeDragElement;
-            // call a function whenever the cursor moves:
             document.onmousemove = elementDrag;
         };
 
         const elementDrag = (e) => {
             e = e || window.event;
             e.preventDefault();
-            // calculate the new cursor position:
-            pos1 = pos3 - e.clientX;
-            pos2 = pos4 - e.clientY;
-            pos3 = e.clientX;
-            pos4 = e.clientY;
-            // set the element's new position:
-            this.termial.style.top = (this.termial.offsetTop - pos2) + "px";
-            this.termial.style.left = (this.termial.offsetLeft - pos1) + "px";
-            console.log("TOP:", this.termial.style.top);
-            console.log("LEFT:", this.termial.style.left);
+            newPositionX = initialPositionX - e.clientX;
+            newPositionY = initialPositionY - e.clientY;
+            initialPositionX = e.clientX;
+            initialPositionY = e.clientY;
+            this.termial.style.top = (this.termial.offsetTop - newPositionY) + 'px';
+            this.termial.style.left = (this.termial.offsetLeft - newPositionX) + 'px';
         };
 
-        function closeDragElement() {
-            // stop moving when mouse button is released:
+        const closeDragElement = () => {
             document.onmouseup = null;
             document.onmousemove = null;
-        }
+        };
     }
 }
 
