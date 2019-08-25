@@ -49,6 +49,6 @@
   },
   "dependencies": {
     "font-awesome": "^4.7.0",
-    "npm": "^6.5.0"
+    "npm": "^6.11.2"
   }
 }
