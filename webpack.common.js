@@ -1,6 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -117,9 +116,6 @@ module.exports = {
         new webpack.NamedModulesPlugin(),
         new webpack.DefinePlugin({
             "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV)
-        }),
-        new ExtractTextPlugin({
-            filename: 'main.css'
         }),
         new HtmlWebpackPlugin({
             template: path.join(__dirname, 'src/index.html'),
