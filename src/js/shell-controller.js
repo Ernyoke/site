@@ -2,7 +2,7 @@
 
 import {formatNumber, whiteSpace} from './utils'
 import {LinkedList} from "./linked-list";
-import {comareArrays} from "./utils";
+import {compareArrays} from "./utils";
 
 const CONTENT_TYPE = {
     FILE: 'file',
@@ -94,7 +94,7 @@ export class ShellController {
                 const latestCommand = !!this.history.last ? this.history.last.value : [];
                 if (command !== COMMAND.EMPTY &&
                     (command !== latestCommand[0] ||
-                    !comareArrays(args, latestCommand[1], (a, b) => a === b))) {
+                    !compareArrays(args, latestCommand[1], (a, b) => a === b))) {
                     this.history.last = [command, args];
                 }
             } else {

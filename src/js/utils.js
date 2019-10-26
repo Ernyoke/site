@@ -17,7 +17,7 @@ const whiteSpace = count => {
     return str;
 };
 
-const comareArrays = (a, b, equals) => {
+const compareArrays = (a, b, equals) => {
     if (!!a && !!b) {
         if (a.length === b.length) {
             for (let i = 0; i < a.length; i++) {
@@ -33,4 +33,4 @@ const comareArrays = (a, b, equals) => {
     return a === b;
 };
 
-export {formatNumber, whiteSpace, comareArrays};
+export {formatNumber, whiteSpace, compareArrays};
