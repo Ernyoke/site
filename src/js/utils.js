@@ -9,7 +9,7 @@ const formatNumber = (numberStr, maxStringSize) => {
     return str;
 };
 
-const whiteSpace = count => {
+const whiteSpace = (count) => {
     let str = '';
     for (let i = 0; i < count; i++) {
         str += '&nbsp';

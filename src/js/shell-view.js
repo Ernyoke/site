@@ -4,7 +4,16 @@ import '../css/main.scss';
 import {ShellController} from './shell-controller';
 import {ShellService} from './shell-service';
 
+/**
+ * Implementation of the View (MVC) for the terminal window.
+ */
 export class ShellView {
+    /**
+     *
+     * @param {Element} terminalHeader
+     * @param {Element} terminalBody
+     * @param {Element} terminal
+     */
     constructor(terminalHeader, terminalBody, terminal) {
         this.shellController = null;
         this.terminalHeader = terminalHeader;
@@ -16,23 +25,35 @@ export class ShellView {
         this.makeTerminalDraggable();
     }
 
+    /**
+     * Setter method to be able to inject the controller class.
+     * @param {ShellController} shellController
+     */
     setController(shellController) {
         this.shellController = shellController;
     }
 
+    /**
+     * Process keyboard events.
+     * @param {EventListenerOrEventListenerObject} event: event generated after the keypress.
+     * @param {function} func: callback function which should be executed after the event is processed.
+     */
     processGenericKeyEvent(event, func) {
         const prompt = event.target || {};
         const input = prompt.textContent.trim();
         try {
             func(input);
         } catch (e) {
-            console.error(e);
             this.showError(e.message);
         }
         event.preventDefault();
         this.resetTabStatus();
     }
 
+    /**
+     * Process Tab key event.
+     * @param {EventListenerOrEventListenerObject} event: event generated after the keypress.
+     */
     processTabKeyEvent(event) {
         if (this.numberOfConsecutiveTabs === 0) {
             const prompt = event.target || {};
@@ -43,11 +64,18 @@ export class ShellView {
         event.preventDefault();
     }
 
+    /**
+     * Reset the counter which holds how many times was the Tab key pressed. Resets the original input text.
+     */
     resetTabStatus() {
         this.numberOfConsecutiveTabs = 0;
         this.originalInput = '';
     }
 
+    /**
+     * Process generic key events.
+     * @param {EventListenerOrEventListenerObject} event: event generated after the keypress.
+     */
     keyPressEvent(event) {
         switch (event.keyCode) {
             // handle TAB key event
@@ -83,14 +111,18 @@ export class ShellView {
         }
     }
 
+    /**
+     *
+     * @param {EventListenerOrEventListenerObject} event
+     */
     resetPrompt(event) {
         const prompt = event.target.parentNode || {};
         const newPrompt = prompt.cloneNode(true);
         const currentPath = this.shellController.computeCurrentPath();
         const newPwd = newPrompt.querySelector('[data-js=prompt-pwd]');
-        if (!!newPwd) newPwd.innerText = currentPath + '>';
+        if (newPwd) newPwd.innerText = currentPath + '>';
         const newInput = newPrompt.querySelector('[data-js=prompt-input]');
-        if (!!newInput) {
+        if (newInput) {
             newInput.innerHTML = '';
             prompt.setAttribute('contenteditable', false);
             this.terminalBody.appendChild(newPrompt);
@@ -100,12 +132,16 @@ export class ShellView {
         if (!newInput) throw Error('Could not find [data-js=prompt-input]!');
     }
 
+    /**
+     *
+     * @param {string} command
+     */
     setPrompt(command) {
         const prompts = document.querySelectorAll('[data-js=prompt]');
         if (prompts.length > 0) {
             const prompt = prompts[prompts.length - 1];
             const input = prompt.querySelector('[data-js=prompt-input]');
-            if (!!input) {
+            if (input) {
                 input.innerHTML = command;
                 input.focus();
                 // Move the cursor at the end of the text.
@@ -116,23 +152,35 @@ export class ShellView {
                 selection.removeAllRanges();
                 selection.addRange(range);
             } else {
-                throw Error('Could not find [data-js=input]!')
+                throw Error('Could not find [data-js=input]!');
             }
         } else {
-            throw Error('Could not find [data-js=prompt]!')
+            throw Error('Could not find [data-js=prompt]!');
         }
     }
 
+    /**
+     * Display output string as HTML inside the terminal window.
+     * @param {string} output: string with HTML content
+     */
     showHtmlOutput(output) {
         this.terminalBody.innerHTML += (`${output} <br>`);
     }
 
+    /**
+     * Display output as text inside the terminal window.
+     * @param {string} output: text to be displayed
+     */
     showOutput(output) {
         const span = document.createElement('span');
         span.innerText += output;
         this.terminalBody.appendChild(span);
     }
 
+    /**
+     * Display string as error inside the terminal window.
+     * @param {string} errorMessage: text to be displayed.
+     */
     showError(errorMessage) {
         const span = document.createElement('span');
         span.classList.add('body__error');
@@ -140,10 +188,16 @@ export class ShellView {
         this.terminalBody.appendChild(span);
     }
 
+    /**
+     * Clears the terminal window.
+     */
     clearScreen() {
         this.terminalBody.innerHTML = '';
     }
 
+    /**
+     * Makes the terminal dialog draggable.
+     */
     makeTerminalDraggable() {
         let newPositionX = 0;
         let newPositionY = 0;
@@ -200,12 +254,12 @@ const init = () => {
                     const lastInput = allInputs[allInputs.length - 1];
                     lastInput.focus();
                 } else {
-                    throw new Error("Could not find [data-js=prompt-input]!");
+                    throw new Error('Could not find [data-js=prompt-input]!');
                 }
             });
 
             const shellService = new ShellService();
-            shellService.getData().then(data => {
+            shellService.getData().then((data) => {
                 const shellController = new ShellController(shellView, data);
                 shellView.setController(shellController);
             }).catch(() => {
@@ -219,9 +273,9 @@ const init = () => {
                             lastModified: '12/27/2018 6:20 PM',
                             name: 'error.txt',
                             content: 'Could not retrieve data from the host. Please try again by refreshing the page.',
-                            size: 6
+                            size: 6,
                         },
-                    ]
+                    ],
                 };
                 const shellController = new ShellController(shellView, data);
                 shellView.setController(shellController);
@@ -229,12 +283,12 @@ const init = () => {
                 loading.style.display = 'none';
             });
         }
-        if (!terminalHeader) throw new Error("Could not find [data-js=terminal-header]!");
-        if (!terminalBody) throw new Error("Could not find [data-js=terminal-body]!");
+        if (!terminalHeader) throw new Error('Could not find [data-js=terminal-header]!');
+        if (!terminalBody) throw new Error('Could not find [data-js=terminal-body]!');
     }
 
-    if (!terminal) throw new Error("Could not find [data-js=terminal]!");
-    if (!loading) throw new Error("Could not find [data-js=loading]!");
+    if (!terminal) throw new Error('Could not find [data-js=terminal]!');
+    if (!loading) throw new Error('Could not find [data-js=loading]!');
 };
 
 init();
