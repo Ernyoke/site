@@ -1,19 +1,47 @@
 const path = require('path');
+const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-
-const extractPlugin = new ExtractTextPlugin({
-    filename: 'main.css'
-});
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
+    mode: process.env.NODE_ENV,
+    cache: true,
+    context: __dirname,
+    performance: {
+        hints: false
+    },
     entry: ['./src/js/shell-view.js', 'font-awesome/scss/font-awesome.scss'],
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js'
+    },
+    optimization: {
+        minimizer: [new UglifyJsPlugin({
+            sourceMap: true,
+            uglifyOptions: {
+                ie8: false,
+                mangle: true,
+                toplevel: false,
+                compress: {
+                    booleans: true,
+                    conditionals: true,
+                    dead_code: true,
+                    drop_debugger: true,
+                    drop_console: true,
+                    evaluate: true,
+                    sequences: true,
+                    unused: true
+                },
+                output: {
+                    comments: false,
+                    beautify: false,
+                }
+            }
+        })]
     },
     module: {
         rules: [
@@ -85,9 +113,19 @@ module.exports = {
         ]
     },
     plugins: [
-        extractPlugin,
+        new webpack.ProgressPlugin(),
+        new webpack.NamedModulesPlugin(),
+        new webpack.DefinePlugin({
+            "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV)
+        }),
+        new ExtractTextPlugin({
+            filename: 'main.css'
+        }),
         new HtmlWebpackPlugin({
-            template: 'src/index.html'
+            template: path.join(__dirname, 'src/index.html'),
+            minify: false,
+            inject: 'body',
+            hash: false
         }),
         new CleanWebpackPlugin(['dist']),
         new MiniCssExtractPlugin(),

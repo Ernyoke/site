@@ -41,6 +41,7 @@
     "resolve-url-loader": "^3.1.0",
     "sass-loader": "^7.3.1",
     "style-loader": "^0.23.1",
+    "uglifyjs-webpack-plugin": "^2.2.0",
     "url-loader": "^1.1.2",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.9",
@@ -48,7 +49,6 @@
     "webpack-merge": "^4.2.2"
   },
   "dependencies": {
-    "font-awesome": "^4.7.0",
-    "npm": "^6.12.0"
+    "font-awesome": "^4.7.0"
   }
 }
