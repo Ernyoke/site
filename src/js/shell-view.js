@@ -35,8 +35,8 @@ export class ShellView {
 
     /**
      * Process keyboard events.
-     * @param {EventListenerOrEventListenerObject} event: event generated after the keypress.
-     * @param {function} func: callback function which should be executed after the event is processed.
+     * @param {EventListenerOrEventListenerObject} event -  event generated after the keypress.
+     * @param {function} func -  callback function which should be executed after the event is processed.
      */
     processGenericKeyEvent(event, func) {
         const prompt = event.target || {};
@@ -52,7 +52,7 @@ export class ShellView {
 
     /**
      * Process Tab key event.
-     * @param {EventListenerOrEventListenerObject} event: event generated after the keypress.
+     * @param {EventListenerOrEventListenerObject} event -  event generated after the keypress.
      */
     processTabKeyEvent(event) {
         if (this.numberOfConsecutiveTabs === 0) {
@@ -74,7 +74,7 @@ export class ShellView {
 
     /**
      * Process generic key events.
-     * @param {EventListenerOrEventListenerObject} event: event generated after the keypress.
+     * @param {EventListenerOrEventListenerObject} event - event generated after the keypress.
      */
     keyPressEvent(event) {
         switch (event.keyCode) {
@@ -161,7 +161,7 @@ export class ShellView {
 
     /**
      * Display output string as HTML inside the terminal window.
-     * @param {string} output: string with HTML content
+     * @param {string} output -  string with HTML content
      */
     showHtmlOutput(output) {
         this.terminalBody.innerHTML += (`${output} <br>`);
@@ -169,7 +169,7 @@ export class ShellView {
 
     /**
      * Display output as text inside the terminal window.
-     * @param {string} output: text to be displayed
+     * @param {string} output -  text to be displayed
      */
     showOutput(output) {
         const span = document.createElement('span');
@@ -179,7 +179,7 @@ export class ShellView {
 
     /**
      * Display string as error inside the terminal window.
-     * @param {string} errorMessage: text to be displayed.
+     * @param {string} errorMessage -  text to be displayed.
      */
     showError(errorMessage) {
         const span = document.createElement('span');

@@ -14,8 +14,8 @@ module.exports = {
     ],
     "plugins": [
         "mocha",
+        "chai-friendly",
         "chai-expect",
-        "chai-friendly"
     ],
     "rules": {
         "indent": ["error", 4,
@@ -31,5 +31,12 @@ module.exports = {
         "chai-friendly/no-unused-expressions": 2,
         "chai-expect/missing-assertion": 2,
         "chai-expect/terminating-properties": 1
+    },
+    "globals": {
+        "expect": true,
+        "assert": true,
+        "require": true,
+        "module": true
     }
+
 };

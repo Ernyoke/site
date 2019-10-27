@@ -58,8 +58,8 @@ export class ShellController {
 
     /**
      * Implementation of auto-fill functionality for arguments in case of commands.
-     * @param {string} input: current input string
-     * @param {number} position: value which holds the position of the potential argument from the current argument buffer
+     * @param {string} input -  current input string
+     * @param {number} position -  value which holds the position of the potential argument from the current argument buffer
      */
     estimateCommand(input, position) {
         if (!!input && input.match(/^([a-z]|[A-Z]).* */).length > 0) {
@@ -178,7 +178,7 @@ export class ShellController {
 
     /**
      * Implementation of the "type" (cat, show file content) command.
-     * @param {string} arg: arguments string, this should contain the name of the file
+     * @param {string} arg -  arguments string, this should contain the name of the file
      */
     cat(arg) {
         if (arg.length > 0) {
@@ -198,7 +198,7 @@ export class ShellController {
 
     /**
      * Implementation of the "cd" (change directory) command.
-     * @param {string} arg: arguments string, should contain the name of the directory where we will navigate to. In case
+     * @param {string} arg -  arguments string, should contain the name of the directory where we will navigate to. In case
      * of backwards navigation, the string should contain ".."
      */
     changeDirectory(arg) {
@@ -252,7 +252,7 @@ export class ShellController {
     // pwd
     /**
      * Implementation of the "pwd" (show current directory path) command.
-     * @return {string}: return value is string with the current directory's absolute path.
+     * @return {string} -  return value is string with the current directory's absolute path.
      */
     computeCurrentPath() {
         const pwd = 'C:\\';
