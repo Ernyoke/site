@@ -27,7 +27,7 @@
     "chai": "^4.2.0",
     "clean-node": "^1.0.0",
     "clean-webpack-plugin": "^0.1.19",
-    "copy-webpack-plugin": "^4.6.0",
+    "copy-webpack-plugin": "^5.1.0",
     "css-loader": "^1.0.1",
     "eslint": "^5.16.0",
     "eslint-config-google": "^0.12.0",
