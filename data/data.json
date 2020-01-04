@@ -17,6 +17,13 @@
         },
         {
           "type": "file",
+          "lastModified": "01/03/2020 6:25 PM",
+          "name": "fractal_erosion.txt",
+          "content": "<div>Procedurally generate terrain using Diamond-square algorithm. Apply hydraulic and thermal erosion simulations to the terrain. Source code: <a href=\"https://github.com/Ernyoke/fractal-erosion\" target=\"_blank\">github</a></div>",
+          "size": 8
+        },
+        {
+          "type": "file",
           "lastModified": "12/24/2018 6:25 PM",
           "name": "delaunayimage.txt",
           "content": "<div>DelaunayImage is tool written in Java which lets you generate artistic bitmap and vector graphic images using Delaunay triangulation algorithm. Source code: <a href=\"https://github.com/Ernyoke/DelaunayImage\" target=\"_blank\">github</a></div>",
