@@ -48,7 +48,7 @@
     "karma-webpack": "^4.0.2",
     "mini-css-extract-plugin": "^0.5.0",
     "mocha": "^6.2.2",
-    "node-sass": "^4.13.0",
+    "node-sass": "^4.13.1",
     "postcss-loader": "^3.0.0",
     "resolve-url-loader": "^3.1.0",
     "sass-loader": "^7.3.1",
@@ -62,5 +62,17 @@
   },
   "dependencies": {
     "font-awesome": "^4.7.0"
-  }
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "node": false
+    }
+  },
+  "eslintIgnore": [
+    "webpack.*.js",
+    "node_modules/",
+    "*.conf.js",
+    "*.config.js"
+  ]
 }
