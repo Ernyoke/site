@@ -18,9 +18,6 @@ module.exports = merge(common, {
             chunkModules: false
         }
     },
-    output: {
-        sourceMapFilename: '[name].bundle.map',
-    },
     plugins: [
         new webpack.HotModuleReplacementPlugin()
     ]

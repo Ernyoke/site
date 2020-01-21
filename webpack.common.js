@@ -15,8 +15,8 @@ module.exports = {
     },
     entry: ['./src/js/shell-view.js', 'font-awesome/scss/font-awesome.scss'],
     output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'bundle.js'
+        filename: '[name].bundle-[hash]-[id].js',
+        path: path.join(__dirname, 'build')
     },
     optimization: {
         minimizer: [new UglifyJsPlugin({
