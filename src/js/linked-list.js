@@ -16,7 +16,7 @@ class ListItem {
 
     /**
      *
-     * @param {Object} next
+     * @param {Object|null} next
      */
     set next(next) {
         this._next = next;
@@ -24,7 +24,7 @@ class ListItem {
 
     /**
      *
-     * @param {Object} previous
+     * @param {Object|null} previous
      */
     set previous(previous) {
         this._previous = previous;
@@ -80,7 +80,7 @@ export class LinkedList {
 
     /**
      * Prepend an element to the head of the list.
-     * @param {Object}value
+     * @param {Object|null}value
      */
     set first(value) {
         const item = new ListItem(value);
@@ -98,7 +98,7 @@ export class LinkedList {
 
     /**
      * Append an element to the end of the list.
-     * @param {Object}value
+     * @param {Object|null}value
      */
     set last(value) {
         const item = new ListItem(value);

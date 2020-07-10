@@ -26,11 +26,9 @@ const compareArrays = (a, b, equals) => {
                 }
             }
             return true;
-        } else {
-            return false;
         }
     }
-    return a === b;
+    return false;
 };
 
 export {formatNumber, whiteSpace, compareArrays};

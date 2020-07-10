@@ -91,7 +91,8 @@ body {
       overflow-y: scroll;
 
       .body__input {
-        outline-color: $terminal-background;
+        outline: none;
+        //outline-color: $terminal-background;
         border: none;
         display: inline-block;
       }

@@ -10,11 +10,7 @@ export class ShellService {
      * Make a HTTP GET call to an existing resource and return a promise with the result.
      * @return {Promise<any>}
      */
-    getData() {
-        return fetch(RESOURCE).then((resp) => {
-            return resp.json();
-        }).catch((err) => {
-            throw err;
-        });
+    async getData() {
+        return (await fetch(RESOURCE)).json();
     }
 }

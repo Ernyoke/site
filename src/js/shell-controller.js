@@ -1,8 +1,7 @@
 'use strict';
 
-import {formatNumber, whiteSpace} from './utils';
+import {compareArrays, formatNumber, whiteSpace} from './utils';
 import {LinkedList} from './linked-list';
-import {compareArrays} from './utils';
 
 const CONTENT_TYPE = {
     FILE: 'file',
@@ -68,20 +67,13 @@ export class ShellController {
             // exists inside the input string).
             const indexOfFirstNonBreakingSpace = input.indexOf('\u00A0');
             const indexOfFirstNormalSpace = input.indexOf(' ');
-            let indexOfSpace;
-            if (indexOfFirstNonBreakingSpace > -1) {
-                if (indexOfFirstNormalSpace > -1) {
-                    indexOfSpace = indexOfFirstNonBreakingSpace < indexOfFirstNormalSpace ?
-                        indexOfFirstNonBreakingSpace : indexOfFirstNormalSpace;
-                } else {
-                    indexOfSpace = indexOfFirstNonBreakingSpace;
+            const indexOfSpace = (() => {
+                if (indexOfFirstNonBreakingSpace > -1 && indexOfFirstNormalSpace > -1) {
+                    return Math.min(indexOfFirstNormalSpace, indexOfFirstNonBreakingSpace);
                 }
-            } else {
-                if (indexOfFirstNormalSpace > -1) {
-                    indexOfSpace = indexOfFirstNormalSpace;
-                }
-            }
-            if (indexOfSpace) {
+                return Math.max(indexOfFirstNonBreakingSpace, indexOfFirstNormalSpace, 0);
+            })();
+            if (indexOfSpace > 0) {
                 const cmd = input.substring(0, indexOfSpace).toLowerCase();
                 const args = input.substring(indexOfSpace + 1).toLowerCase();
                 if (this.commandMap.has(cmd)) {
@@ -105,8 +97,7 @@ export class ShellController {
         const words = input.trim().toLowerCase().split(' ');
         if (words.length > 0) {
             const command = words[0];
-            const args = [];
-            args.push(...words.slice(1));
+            const args = [...words.slice(1)];
             if (this.commandMap.has(command)) {
                 this.commandMap.get(command).run(args);
                 const latestCommand = this.history.last ? this.history.last.value : [];
