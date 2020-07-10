@@ -107,7 +107,8 @@ export class ShellController {
                     this.history.last = [command, args];
                 }
             } else {
-                throw Error('Nonexistent command!');
+                throw Error(`'${command}' is not recognized as an internal or external command,
+                operable program or batch file.`);
             }
         }
     }
@@ -249,8 +250,8 @@ export class ShellController {
         const pwd = 'C:\\';
         if (this.folderStack.length > 0) {
             return pwd + this.folderStack
-                .map((item) => item.name)
-                .reduce((accumulator, currentValue) => accumulator + '\\' + currentValue) +
+                    .map((item) => item.name)
+                    .reduce((accumulator, currentValue) => accumulator + '\\' + currentValue) +
                 this.currentDirectory.name;
         }
         return pwd;

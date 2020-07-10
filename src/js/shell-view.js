@@ -182,10 +182,13 @@ export class ShellView {
      * @param {string} errorMessage -  text to be displayed.
      */
     showError(errorMessage) {
+        const div = document.createElement('div');
         const span = document.createElement('span');
         span.classList.add('body__error');
         span.innerText += errorMessage;
-        this.terminalBody.appendChild(span);
+        div.appendChild(span);
+        this.terminalBody.appendChild(div);
+        this.terminalBody.appendChild(document.createElement('br'));
     }
 
     /**
