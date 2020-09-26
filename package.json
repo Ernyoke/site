@@ -7,7 +7,7 @@
     "start": "webpack-dev-server --open --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
     "predeploy": "npm run rebuild",
-    "deploy": "npm run predeploy && gh-pages -d build",
+    "deploy": "gh-pages -d build",
     "clean": "clean-node",
     "rebuild": "npm run clean && npm install && npm run build",
     "clean-source": "rimraf README.md src webroot package.json",
