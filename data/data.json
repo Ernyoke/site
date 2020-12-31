@@ -92,6 +92,13 @@
       "size": "12",
       "name": "contact.txt",
       "content": "<div>Email: ervin.szilagyi[at]outlook.com</div><div>Skype: ervin.szilagyi[at]outlook.com</div>"
+    },
+    {
+      "type": "file",
+      "lastModified": "12/31/2020 11:30 PM",
+      "size": "20",
+      "name": "certifications.txt",
+      "content": "<div>Oracle Certified Java 11 Developer</div><div>Microsoft Certified Azure Developer <a href=\"https://www.youracclaim.com/badges/93829fc2-5ed8-4bf6-9291-5912ac66af7f\">[view badge]</a></div>"
     }
   ]
 }
