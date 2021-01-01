@@ -24,11 +24,11 @@ export class ShellController {
     /**
      *
      * @param {ShellView} shellView
-     * @param {object} data
+     * @param {ShellService} shellService
      */
-    constructor(shellView, data) {
+    constructor(shellView, shellService) {
         this.shellView = shellView;
-        this.currentDirectory = data;
+        this.shellService = shellService;
         this.folderStack = [];
         this.commandMap = new Map([
             [COMMAND.EMPTY, {
@@ -53,6 +53,30 @@ export class ShellController {
             }],
         ]);
         this.history = new LinkedList();
+    }
+
+    /**
+     * Initialize the state of the current directory.
+     */
+    async init() {
+        try {
+            this.currentDirectory = await this.shellService.getData();
+        } catch (exception) {
+            this.currentDirectory = {
+                type: 'dir',
+                astModified: '09/15/2018  02:39 PM',
+                name: '',
+                content: [
+                    {
+                        type: 'file',
+                        lastModified: '12/27/2018 6:20 PM',
+                        name: 'error.txt',
+                        content: 'Could not retrieve data from the host. Please try again by refreshing the page.',
+                        size: 6,
+                    },
+                ],
+            };
+        }
     }
 
     /**

@@ -262,29 +262,11 @@ const init = () => {
             });
 
             const shellService = new ShellService();
-            shellService.getData().then((data) => {
-                const shellController = new ShellController(shellView, data);
-                shellView.setController(shellController);
-            }).catch(() => {
-                const data = {
-                    type: 'dir',
-                    astModified: '09/15/2018  02:39 PM',
-                    name: '',
-                    content: [
-                        {
-                            type: 'file',
-                            lastModified: '12/27/2018 6:20 PM',
-                            name: 'error.txt',
-                            content: 'Could not retrieve data from the host. Please try again by refreshing the page.',
-                            size: 6,
-                        },
-                    ],
-                };
-                const shellController = new ShellController(shellView, data);
-                shellView.setController(shellController);
-            }).finally(() => {
+            const shellController = new ShellController(shellView, shellService);
+            shellController.init().then(() => {
                 loading.style.display = 'none';
             });
+            shellView.setController(shellController);
         }
         if (!terminalHeader) throw new Error('Could not find [data-js=terminal-header]!');
         if (!terminalBody) throw new Error('Could not find [data-js=terminal-body]!');
