@@ -117,13 +117,13 @@ export class ShellController {
      * Parse the input string and process the command.
      * @param {string} input
      */
-    processCommand(input) {
+    async processCommand(input) {
         const words = input.trim().toLowerCase().split(' ');
         if (words.length > 0) {
             const command = words[0];
             const args = [...words.slice(1)];
             if (this.commandMap.has(command)) {
-                this.commandMap.get(command).run(args);
+                await this.commandMap.get(command).run(args);
                 const latestCommand = this.history.last ? this.history.last.value : [];
                 if (command !== COMMAND.EMPTY &&
                     (command !== latestCommand[0] ||
@@ -196,7 +196,7 @@ export class ShellController {
      * Implementation of the "type" (cat, show file content) command.
      * @param {string} arg -  arguments string, this should contain the name of the file
      */
-    cat(arg) {
+    async cat(arg) {
         if (arg.length > 0) {
             const filename = arg[0].trim();
             const files = this.currentDirectory.content.filter((item) => {
@@ -205,7 +205,13 @@ export class ShellController {
             if (files < 1) {
                 throw Error(`File with the name ${filename} of does not exist!`);
             } else {
-                this.shellView.showHtmlOutput(files[0].content);
+                const file = files[0];
+                if (file.contentFile) {
+                    const content = await this.shellService.getTextData(file.contentFile);
+                    this.shellView.showHtmlOutput(content);
+                } else {
+                    this.shellView.showHtmlOutput(files[0].content);
+                }
             }
         } else {
             throw Error('Missing argument from command "type"! Usage: type [FILENAME]');

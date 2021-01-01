@@ -13,4 +13,13 @@ export class ShellService {
     async getData() {
         return (await fetch(RESOURCE)).json();
     }
+
+    /**
+     * Retrieves the data from the input path in text format.
+     * @param {string} path
+     * @return {Promise<string>}
+     */
+    async getTextData(path) {
+        return (await fetch(path)).text();
+    }
 }

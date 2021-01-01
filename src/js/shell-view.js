@@ -85,10 +85,10 @@ export class ShellView {
             }
             // handle ENTER key event
             case 13: {
-                this.processGenericKeyEvent(event, (input) => {
-                    this.shellController.processCommand(input);
+                this.processGenericKeyEvent(event, async (input) => {
+                    await this.shellController.processCommand(input);
+                    this.resetPrompt(event);
                 });
-                this.resetPrompt(event);
                 break;
             }
             // handle UP key event
