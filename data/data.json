@@ -98,7 +98,7 @@
       "lastModified": "12/31/2020 11:30 PM",
       "size": "20",
       "name": "certifications.txt",
-      "content": "<div>Oracle Certified Professional: Java SE 11 Developer <a href=\"https://www.youracclaim.com/badges/d24ba586-7589-488b-ac86-2b5ae49e994a\" target=\"_blank\">[view badge]</a></div><div>Microsoft Certified: Azure Developer Associate <a href=\"https://www.youracclaim.com/badges/93829fc2-5ed8-4bf6-9291-5912ac66af7f\" target=\"_blank\">[view badge]</a></div> <div>Microsoft Certified: Azure Fundamentals <a href=\"https://www.youracclaim.com/badges/3e2a89c1-0ef3-4a45-9e22-ccd54ac6e0ef\" target=\"_blank\">[view badge]</a></div>"
-    }
+      "contentFile": "data/certifications.html"
+      }
   ]
 }
