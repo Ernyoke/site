@@ -38,11 +38,11 @@ export class ShellView {
      * @param {EventListenerOrEventListenerObject} event -  event generated after the keypress.
      * @param {function} func -  callback function which should be executed after the event is processed.
      */
-    processGenericKeyEvent(event, func) {
+    async processGenericKeyEvent(event, func) {
         const prompt = event.target || {};
         const input = prompt.textContent.trim();
         try {
-            func(input);
+            await func(input);
         } catch (e) {
             this.showError(e.message);
         }
@@ -76,7 +76,7 @@ export class ShellView {
      * Process generic key events.
      * @param {EventListenerOrEventListenerObject} event - event generated after the keypress.
      */
-    keyPressEvent(event) {
+    async keyPressEvent(event) {
         switch (event.keyCode) {
             // handle TAB key event
             case 9: {
@@ -85,22 +85,22 @@ export class ShellView {
             }
             // handle ENTER key event
             case 13: {
-                this.processGenericKeyEvent(event, async (input) => {
+                await this.processGenericKeyEvent(event, async (input) => {
                     await this.shellController.processCommand(input);
-                    this.resetPrompt(event);
                 });
+                this.resetPrompt(event);
                 break;
             }
             // handle UP key event
             case 38: {
-                this.processGenericKeyEvent(event, (input) => {
+                await this.processGenericKeyEvent(event, (input) => {
                     this.shellController.historyBefore(input);
                 });
                 break;
             }
             // handle DOWN key event
             case 40: {
-                this.processGenericKeyEvent(event, (input) => {
+                await this.processGenericKeyEvent(event, (input) => {
                     this.shellController.historyAfter(input);
                 });
                 break;
@@ -245,8 +245,8 @@ const init = () => {
             const shellView = new ShellView(terminalHeader, terminalBody, terminal);
 
             // Catch every keypress and handle it accordingly
-            terminal.addEventListener('keydown', (event) => {
-                shellView.keyPressEvent(event);
+            terminal.addEventListener('keydown', async (event) => {
+                await shellView.keyPressEvent(event);
             });
 
 

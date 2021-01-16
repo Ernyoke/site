@@ -199,9 +199,9 @@ export class ShellController {
     async cat(arg) {
         if (arg.length > 0) {
             const filename = arg[0].trim();
-            const files = this.currentDirectory.content.filter((item) => {
-                return item.name === filename && item.type === CONTENT_TYPE.FILE;
-            });
+            const files = this.currentDirectory.content.filter((item) =>
+                item.name === filename && item.type === CONTENT_TYPE.FILE
+            );
             if (files < 1) {
                 throw Error(`File with the name ${filename} of does not exist!`);
             } else {
@@ -271,19 +271,18 @@ export class ShellController {
         this.shellView.showHtmlOutput(output);
     }
 
-    // pwd
     /**
      * Implementation of the "pwd" (show current directory path) command.
-     * @return {string} -  return value is string with the current directory's absolute path.
+     * @return {string} the absolute path of the current directory.
      */
     computeCurrentPath() {
-        const pwd = 'C:\\';
+        const root = 'C:\\';
         if (this.folderStack.length > 0) {
-            return pwd + this.folderStack
-                    .map((item) => item.name)
-                    .reduce((accumulator, currentValue) => accumulator + '\\' + currentValue) +
-                this.currentDirectory.name;
+            const path = this.folderStack
+                .map((item) => item.name)
+                .reduce((accumulator, currentValue) => accumulator + '\\' + currentValue);
+            return `${root}${path}${this.currentDirectory.name}`;
         }
-        return pwd;
+        return root;
     }
 }
