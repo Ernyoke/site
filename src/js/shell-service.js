@@ -20,6 +20,7 @@ export class ShellService {
      * @return {Promise<string>}
      */
     async getTextData(path) {
-        return (await fetch(path)).text();
+        const body = await fetch(path);
+        return body.text();
     }
 }

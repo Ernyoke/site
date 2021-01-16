@@ -32,24 +32,24 @@ export class ShellController {
         this.folderStack = [];
         this.commandMap = new Map([
             [COMMAND.EMPTY, {
-                run: () => undefined,
+                run: async () => {},
             }],
             [COMMAND.DIR, {
-                run: () => this.listContent(),
+                run: async () => this.listContent(),
             }],
             [COMMAND.CD, {
-                run: (args) => this.changeDirectory(args),
+                run: async (args) => this.changeDirectory(args),
                 argType: CONTENT_TYPE.DIR,
             }],
             [COMMAND.TYPE, {
-                run: (args) => this.cat(args),
+                run: async (args) => await this.cat(args),
                 argType: CONTENT_TYPE.FILE,
             }],
             [COMMAND.CLS, {
-                run: () => this.clearScreen(),
+                run: async () => this.clearScreen(),
             }],
             [COMMAND.HELP, {
-                run: () => this.help(),
+                run: async () => this.help(),
             }],
         ]);
         this.history = new LinkedList();

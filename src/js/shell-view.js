@@ -41,12 +41,12 @@ export class ShellView {
     async processGenericKeyEvent(event, func) {
         const prompt = event.target || {};
         const input = prompt.textContent.trim();
+        event.preventDefault();
         try {
             await func(input);
         } catch (e) {
             this.showError(e.message);
         }
-        event.preventDefault();
         this.resetTabStatus();
     }
 
