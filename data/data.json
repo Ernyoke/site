@@ -54,14 +54,14 @@
           "type": "file",
           "lastModified": "12/23/2018  06:30 PM",
           "name": "social.txt",
-          "content": "<div>You can find me here: <ul><li>LinkedIn:<a href=\"https://www.linkedin.com/in/szilagyiervin/\" target=\"_blank\">in/szilagyiervin</a></li><li>Twitter:<a href=\"https://twitter.com/ervin_szilagyi\" target=\"_blank\">@ervin_szilagyi</a></li><li>StackOverflow:<a href=\"https://stackoverflow.com/users/7661119/ervin-szilagyi\" target=\"_blank\">ervin-szilagyi</a></li><li>GitHub:<a href=\"https://github.com/Ernyoke\" target=\"_blank\">@ernyoke</a></li></ul></div>",
+          "contentFile": "data/social.html",
           "size": 12
         },
         {
           "type": "file",
-          "lastModified": "12/24/2018  12:00 AM",
-          "name": "coding.txt",
-          "content": "<div>I'm mostly interested in JVM languages like Java, Kotlin, etc. In the past I've done C/C++ professionally using MFC and Boost libraries. I'm not a big fan of dynamically typed languages, but I can get along with Javascript and Python. In my professional job/free time I've used extensively the following languages/frameworks: QT(C++ and PyQt), Android(usage of both Java and Kotlin), Angular(AngularJS as a full-stack developer at my current job, Angular2 and upwards in some private projects), Spring(extensively used at my current job, applied in several home projects).</div>",
+          "lastModified": "17/01/2021  12:00 AM",
+          "name": "tech-stack.txt",
+          "contentFile": "data/tech-stack.html",
           "size": 20
         },
         {
