@@ -22,7 +22,7 @@ const COMMAND = {
  **/
 export class ShellController {
     /**
-     *
+     * Constructor of ShellController.
      * @param {ShellView} shellView
      * @param {ShellService} shellService
      */
@@ -32,7 +32,8 @@ export class ShellController {
         this.folderStack = [];
         this.commandMap = new Map([
             [COMMAND.EMPTY, {
-                run: async () => {},
+                run: async () => {
+                },
             }],
             [COMMAND.DIR, {
                 run: async () => this.listContent(),
@@ -72,6 +73,7 @@ export class ShellController {
                         lastModified: '12/27/2018 6:20 PM',
                         name: 'error.txt',
                         content: 'Could not retrieve data from the host. Please try again by refreshing the page.',
+                        contentFile: 'none',
                         size: 6,
                     },
                 ],
@@ -84,7 +86,7 @@ export class ShellController {
      * @param {string} input -  current input string
      * @param {number} position -  value which holds the position of the potential argument from the current argument buffer
      */
-    estimateCommand(input, position) {
+    autoFillCommand(input, position) {
         if (!!input && input.match(/^([a-z]|[A-Z]).* */).length > 0) {
             // Get the index of the first space. The span input distinguishes between non breaking space and normal space,
             // this means whe have to get the minimum index of a space where the index itself is positive (the space
@@ -101,9 +103,8 @@ export class ShellController {
                 const cmd = input.substring(0, indexOfSpace).toLowerCase();
                 const args = input.substring(indexOfSpace + 1).toLowerCase();
                 if (this.commandMap.has(cmd)) {
-                    const eligibleContent = this.currentDirectory.content.filter((item) => {
-                        return item.type === this.commandMap.get(cmd).argType && item.name.startsWith(args);
-                    });
+                    const eligibleContent = this.currentDirectory.content.filter((item) =>
+                        item.type === this.commandMap.get(cmd).argType && item.name.startsWith(args));
                     if (eligibleContent.length > 0) {
                         const normalPosition = position % eligibleContent.length;
                         this.shellView.setPrompt(`${cmd} ${eligibleContent[normalPosition].name}`);
@@ -202,16 +203,12 @@ export class ShellController {
             const files = this.currentDirectory.content.filter((item) =>
                 item.name === filename && item.type === CONTENT_TYPE.FILE
             );
-            if (files < 1) {
-                throw Error(`File with the name ${filename} of does not exist!`);
-            } else {
+            if (files.length > 0) {
                 const file = files[0];
-                if (file.contentFile) {
-                    const content = await this.shellService.getTextData(file.contentFile);
-                    this.shellView.showHtmlOutput(content);
-                } else {
-                    this.shellView.showHtmlOutput(files[0].content);
-                }
+                const content = file.content ? file.content : await this.shellService.getTextData(file.contentFile);
+                this.shellView.showHtmlOutput(content);
+            } else {
+                throw Error(`File with the name ${filename} of does not exist!`);
             }
         } else {
             throw Error('Missing argument from command "type"! Usage: type [FILENAME]');
@@ -235,12 +232,12 @@ export class ShellController {
                 const dirs = this.currentDirectory.content.filter((item) => {
                     return item.name === directoryName && item.type === CONTENT_TYPE.DIR;
                 });
-                if (dirs.length < 1) {
-                    throw Error(`Directory with the name ${directoryName} of does not exist!`);
-                } else {
+                if (dirs.length > 0) {
                     this.folderStack.push(this.currentDirectory);
                     this.currentDirectory = dirs[0];
                     this.shellView.showHtmlOutput('');
+                } else {
+                    throw Error(`Directory with the name ${directoryName} of does not exist!`);
                 }
             }
         } else {
@@ -249,7 +246,7 @@ export class ShellController {
     }
 
     /**
-     * Implementation of te "cls" (clear screen) command.
+     * Implementation of the "cls" (clear screen) command.
      */
     clearScreen() {
         this.shellView.clearScreen();

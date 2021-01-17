@@ -9,7 +9,8 @@
     "predeploy": "npm run rebuild",
     "deploy": "gh-pages -d build",
     "clean": "clean-node",
-    "rebuild": "npm run clean && npm install && npm run build",
+    "clean-build": "npm run clean && rimraf build",
+    "rebuild": "npm run clean-build && npm ci && npm run build",
     "clean-source": "rimraf README.md src webroot package.json",
     "test": "karma start"
   },

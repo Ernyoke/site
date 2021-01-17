@@ -12,28 +12,28 @@
           "type": "file",
           "lastModified": "12/24/2018 6:25 PM",
           "name": "imger.txt",
-          "content": "<div>A small image processing library written in Go. Source code: <a href=\"https://github.com/Ernyoke/Imger\" target=\"_blank\">github</a></div>",
+          "contentFile": "data/projects/imger.html",
           "size": 8
         },
         {
           "type": "file",
           "lastModified": "01/03/2020 6:25 PM",
           "name": "fractal_erosion.txt",
-          "content": "<div>Procedurally generate terrain using Diamond-square algorithm. Apply hydraulic and thermal erosion simulations to the terrain. Source code: <a href=\"https://github.com/Ernyoke/fractal-erosion\" target=\"_blank\">github</a></div>",
+          "contentFile": "data/projects/fractal-erosion.html",
           "size": 8
         },
         {
           "type": "file",
           "lastModified": "12/24/2018 6:25 PM",
           "name": "delaunayimage.txt",
-          "content": "<div>DelaunayImage is tool written in Java which lets you generate artistic bitmap and vector graphic images using Delaunay triangulation algorithm. Source code: <a href=\"https://github.com/Ernyoke/DelaunayImage\" target=\"_blank\">github</a></div>",
+          "contentFile": "data/projects/delaunay-image.html",
           "size": 10
         },
         {
           "type": "file",
           "lastModified": "12/24/2018 6:30 PM",
           "name": "artistic_video_gui.txt",
-          "content": "<div>The project's goal was the develop a GUI application where the user can transfer the artistic style from well known pictures painted by hungarian artists to their chosen images\\videos. Source code: <a href=\"https://github.com/Ernyoke/Artistic_video_GUI\" target=\"_blank\">github</a></div>",
+          "contentFile": "data/projects/artistic-video.html",
           "size": 12
         }
       ]
@@ -47,28 +47,28 @@
           "type": "file",
           "lastModified": "12/23/2018  06:00 PM",
           "name": "resume.txt",
-          "content": "<div>Download my full resume: <a href=\"data\\ervin_szilagyi.pdf\" target=\"_blank\">ervin_szilagyi.pdf</a> </div>",
+          "contentFile": "data/resume/resume.html",
           "size": 2
         },
         {
           "type": "file",
           "lastModified": "12/23/2018  06:30 PM",
           "name": "social.txt",
-          "contentFile": "data/social.html",
+          "contentFile": "data/resume/social.html",
           "size": 12
         },
         {
           "type": "file",
           "lastModified": "17/01/2021  12:00 AM",
           "name": "tech-stack.txt",
-          "contentFile": "data/tech-stack.html",
+          "contentFile": "data/resume/tech-stack.html",
           "size": 20
         },
         {
           "type": "file",
           "lastModified": "01/01/2019  03:50 PM",
           "name": "hobbies.txt",
-          "content": "<div>First and foremost I like to thinker with new technologies. In my free time I frequently find myself hacking around with bleeding-edge tools, reading books/documentations, watching conference videos and tutorials. Besides, I like to read, mainly sci-fi and thrillers. You can find my goodreads profile here: <a href=\"https://www.goodreads.com/user/show/90373114-szil-gyi-ervin\" target=\"_blank\">szil-gyi-ervin</a>. I'm also a gamer.</div>",
+          "contentFile": "data/resume/hobbies.html",
           "size": 32
         }
       ]
@@ -84,14 +84,14 @@
       "lastModified": "09/15/2018  02:39 PM",
       "size": "32",
       "name": "about.txt",
-      "content": "<div>My name is Ervin Szilagyi. I'm a software engineer currently working for RIA Solutions Group as a full-stack developer. I have a bachelor's degree in computer science and a master's degree in software engineering, both from Sapientia Hungarian University of Transylvania. I'm interested in micro-services and computer security.</div>"
+      "contentFile": "data/about.html"
     },
     {
       "type": "file",
       "lastModified": "09/15/2018  02:39 PM",
       "size": "12",
       "name": "contact.txt",
-      "content": "<div>Email: ervin.szilagyi[at]outlook.com</div><div>Skype: ervin.szilagyi[at]outlook.com</div>"
+      "contentFile": "data/contact.html"
     },
     {
       "type": "file",

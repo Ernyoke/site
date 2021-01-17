@@ -59,7 +59,7 @@ export class ShellView {
             const prompt = event.target || {};
             this.originalInput = prompt.textContent;
         }
-        this.shellController.estimateCommand(this.originalInput, this.numberOfConsecutiveTabs);
+        this.shellController.autoFillCommand(this.originalInput, this.numberOfConsecutiveTabs);
         this.numberOfConsecutiveTabs++;
         event.preventDefault();
     }
